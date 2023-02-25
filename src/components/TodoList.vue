@@ -1,0 +1,144 @@
+<template>
+    <div>
+        <h1>To Do List</h1>
+        <div v-if="isEditing" class="d-flex">
+            <form-group id="input-group-2">
+                <b-form-input id="input-2" v-model="todo.name" placeholder="Enter name" required></b-form-input>
+            </form-group>
+            <b-button @click="updateJob(idJob)" variant="success" class="mx-2">Sửa</b-button>
+        </div>
+        <div v-else @submit="onSubmit" class="d-flex">
+            <form-group id="input-group-2">
+                <b-form-input id="input-2" v-model="todo.name" placeholder="Enter name" required></b-form-input>
+            </form-group>
+            <b-button @click="onSubmit" variant="primary" class="mx-2">Thêm</b-button>
+        </div>
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">Jobs</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">#</th>
+                    <th scope="col">#</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(job, index) in jobs" :key="index" @click="job.selected = !job.selected"
+                    :class="{ selected: job.selected }">
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.status}}</td>
+                    <td>
+                        <a class="text-center" @click="editJob(job._id, job)">
+                            <span class="fa fa-pen"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="text-center" @click="deleteJob(index, job._id, job)">
+                            <span class="fa fa-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</template>
+
+<script>
+import axios from "axios";
+
+export default {
+    data() {
+        return {
+
+            todo: {
+                name: null,
+                status: null
+            },
+
+            jobs: [],
+            idJob: null,
+            isEditing: false,
+            upHere: false,
+        }
+    },
+    methods: {
+        onSubmit() {
+            axios
+                .post('http://localhost:3000/create', this.todo)
+                .then((response) => {
+                    console.log(response)
+
+                    this.jobs.push({
+                        name: this.todo.name,
+                        status: 'unfinish'
+                    })
+                })
+                .catch((e) => {
+                    this.errors.push(e);
+                });
+
+
+
+        },
+        getListJob() {
+        },
+
+        editJob(idJob, job) {
+            this.isEditing = true;
+            this.todo = job
+            this.idJob = idJob
+        },
+
+        updateJob(idJob) {
+            axios
+                .put('http://localhost:3000/' + idJob + '', {
+                    name: this.todo.name,
+                }
+                )
+                .then((response) => {
+                    console.log(response)
+
+                    this.isEditing = false;
+                    this.todo = {
+                        name: null,
+                        status: null
+                    },
+                        this.idJob = !idJob
+                })
+                .catch((e) => {
+                    this.errors.push(e);
+                });
+        },
+        deleteJob(index, idJob, job) {
+            axios
+                .put('http://localhost:3000/' + idJob + '', {
+                    name: job.name,
+                    status: 'disable',
+                }
+                )
+                .then((response) => {
+                    this.jobs.splice(index, 1)
+                    console.log(response)
+                })
+                .catch((e) => {
+                    this.errors.push(e);
+                });
+        }
+    },
+    created() {
+        axios
+            .get('http://localhost:3000/')
+            .then((response) => {
+                this.jobs = response.data
+            })
+            .catch((e) => {
+                this.errors.push(e);
+            });
+    },
+
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped></style>
