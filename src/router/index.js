@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import LoginView from '../views/LoginView.vue';
 import MeView from '../views/MeView.vue';
+import store from '../store';
 
 Vue.use(VueRouter);
 
@@ -36,4 +37,13 @@ const router = new VueRouter({
   routes,
 });
 
+let isInited = false;
+
+router.beforeEach(async (to, from, next) => {
+  if (store.getters.getUserAuthed && !isInited) {
+    await store.dispatch('UserInfo');
+    isInited = true;
+  }
+  next();
+});
 export default router;
