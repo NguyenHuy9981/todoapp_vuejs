@@ -31,33 +31,29 @@
 </template>
 
 <script>
-import axios from "axios";
-import authHeader from "../../auth-header";
+import api from '../../api/user';
+import { storageToken } from '../../storage';
 
 export default {
   data() {
     return {
-      user: [],
+      user: {},
     };
   },
+  async created() {
+    try {
+      const listUser = await api.getMe();
 
-  created() {
-    axios
-      .get("http://localhost:3000/me", { headers: authHeader() })
-      .then((response) => {
-        console.warn(response);
-        this.user = response.data.user;
-      })
-      .catch((e) => {
-        this.errors.push(e);
-      });
+      this.user = listUser.data;
+    } catch (error) {
+      console.log('Loi');
+    }
   },
-
   methods: {
     logout() {
-      localStorage.removeItem("token");
+      storageToken.remove();
 
-      this.$router.push({ name: "Login" });
+      this.$router.push({ name: 'Login' });
     },
   },
 };

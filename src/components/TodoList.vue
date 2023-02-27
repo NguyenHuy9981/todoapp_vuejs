@@ -3,14 +3,16 @@
         <h1>To Do List</h1>
         <div v-if="isEditing" class="d-flex">
             <form-group id="input-group-2">
-                <b-form-input id="input-2" v-model="todo.name" placeholder="Enter name" required></b-form-input>
+                <b-form-input id="input-2" v-model="todo.name" placeholder="Enter name" required>
+                </b-form-input>
             </form-group>
             <b-button @click="updateJob(idJob)" variant="success" class="mx-2">Sửa</b-button>
         </div>
         <div v-else @submit="onSubmit" class="d-flex">
-            <form-group id="input-group-2">
-                <b-form-input id="input-2" v-model="todo.name" placeholder="Enter name" required></b-form-input>
-            </form-group>
+            <b-form-group id="input-group-2">
+                <b-form-input id="input-2" v-model="todo.name" placeholder="Enter name" required>
+                </b-form-input>
+            </b-form-group>
             <b-button @click="onSubmit" variant="primary" class="mx-2">Thêm</b-button>
         </div>
         <table class="table table-bordered mt-4">
@@ -40,104 +42,86 @@
                 </tr>
             </tbody>
         </table>
-
     </div>
 </template>
 
 <script>
-import axios from "axios";
+import api from '../api/todo';
 
 export default {
-    data() {
-        return {
+  name: 'TodoList',
+  data() {
+    return {
+      todo: {
+        name: null,
+        status: null,
+      },
+      jobs: [],
+      idJob: null,
+      isEditing: false,
+      upHere: false,
+    };
+  },
+  methods: {
+    async onSubmit() {
+      try {
+        const result = await api.create(this.todo);
+        console.log(result);
 
-            todo: {
-                name: null,
-                status: null
-            },
-
-            jobs: [],
-            idJob: null,
-            isEditing: false,
-            upHere: false,
-        }
+        this.jobs.push({
+          name: this.todo.name,
+          status: 'unfulfilled',
+        });
+      } catch (error) {
+        console.log('Loi');
+      }
     },
-    methods: {
-        onSubmit() {
-            axios
-                .post('http://localhost:3000/create', this.todo)
-                .then((response) => {
-                    console.log(response)
-
-                    this.jobs.push({
-                        name: this.todo.name,
-                        status: 'unfinish'
-                    })
-                })
-                .catch((e) => {
-                    this.errors.push(e);
-                });
-
-
-
-        },
-        getListJob() {
-        },
-
-        editJob(idJob, job) {
-            this.isEditing = true;
-            this.todo = job
-            this.idJob = idJob
-        },
-
-        updateJob(idJob) {
-            axios
-                .put('http://localhost:3000/' + idJob + '', {
-                    name: this.todo.name,
-                }
-                )
-                .then((response) => {
-                    console.log(response)
-
-                    this.isEditing = false;
-                    this.todo = {
-                        name: null,
-                        status: null
-                    },
-                        this.idJob = !idJob
-                })
-                .catch((e) => {
-                    this.errors.push(e);
-                });
-        },
-        deleteJob(index, idJob, job) {
-            axios
-                .put('http://localhost:3000/' + idJob + '', {
-                    name: job.name,
-                    status: 'disable',
-                }
-                )
-                .then((response) => {
-                    this.jobs.splice(index, 1)
-                    console.log(response)
-                })
-                .catch((e) => {
-                    this.errors.push(e);
-                });
-        }
+    editJob(idJob, job) {
+      this.isEditing = true;
+      this.todo = job;
+      this.idJob = idJob;
     },
-    created() {
-        axios
-            .get('http://localhost:3000/')
-            .then((response) => {
-                this.jobs = response.data
-            })
-            .catch((e) => {
-                this.errors.push(e);
-            });
-    },
+    async updateJob(idJob) {
+      try {
+        const resuilt = await api.update(
+          idJob,
+          {
+            name: this.todo.name,
+          },
+        );
+        console.log(resuilt);
 
-}
+        this.isEditing = false;
+        this.todo = {
+          name: null,
+          status: null,
+        };
+        this.idJob = !idJob;
+      } catch (error) {
+        console.log('Loi');
+      }
+    },
+    async deleteJob(index, idJob) {
+      try {
+        const resuilt = await api.delete(idJob);
+        this.jobs.splice(index, 1);
+        console.log(resuilt);
+      } catch (error) {
+        console.log('Loi');
+      }
+    },
+  },
+  created() {
+    api.getList()
+      .then((response) => {
+        console.log(response);
+        this.jobs = response.data;
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

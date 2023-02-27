@@ -37,7 +37,9 @@
 </template>
 
 <script>
-import axios from "axios";
+
+import api from '../api/auth';
+import { storageToken } from '../storage';
 
 export default {
   data() {
@@ -50,18 +52,16 @@ export default {
   },
 
   methods: {
-    login() {
-      axios
-        .post("http://localhost:3000/login", this.user)
-        .then((response) => {
-          console.warn(response);
-          localStorage.setItem("token", response.data.access_token);
+    async login() {
+      try {
+        const result = await api.login(this.user);
 
-          this.$router.push({ name: "Me" });
-        })
-        .catch((e) => {
-          this.errors.push(e);
-        });
+        storageToken.set(result.data.access_token);
+
+        this.$router.push({ name: 'Me' });
+      } catch (error) {
+        console.log('Lỗi');
+      }
     },
   },
 };

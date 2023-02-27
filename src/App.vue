@@ -7,7 +7,7 @@
 
 <script>
 // @ is an alias to /src
-import HeaderAuth from "./components/auth/HeaderAuth.vue";
+import HeaderAuth from './components/auth/HeaderAuth.vue';
 
 export default {
   components: {

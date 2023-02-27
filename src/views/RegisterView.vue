@@ -48,7 +48,8 @@
 </template>
 
 <script>
-import axios from "axios";
+import api from '../api/auth';
+import { storageToken } from '../storage';
 
 export default {
   data() {
@@ -62,18 +63,16 @@ export default {
   },
 
   methods: {
-    register() {
-      axios
-        .post("http://localhost:3000/register", this.user)
-        .then((response) => {
-          console.warn(response);
-          localStorage.setItem("token", response.data.access_token);
+    async register() {
+      try {
+        const result = await api.register(this.user);
+        storageToken.set(result.data.access_token);
 
-          this.$router.push({ name: "Me" });
-        })
-        .catch((e) => {
-          this.errors.push(e);
-        });
+        // console.warn(result);
+        this.$router.push({ name: 'Login' });
+      } catch (error) {
+        console.log('Loi');
+      }
     },
   },
 };
