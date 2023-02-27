@@ -4,7 +4,6 @@
       <h1 class="mt-2"><strong>Thông tin cá nhân</strong></h1>
       <div class="card-body">
         <h5 class="card-title">Tên: {{ user.name }}</h5>
-       <span>{{ test }}</span>
         <p class="card-text">Email: {{ user.email }}</p>
         <TodoList />
       </div>
@@ -13,7 +12,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import api from '../api/user';
 import TodoList from '../components/TodoList.vue';
 
@@ -21,9 +19,7 @@ export default {
   components: {
     TodoList,
   },
-  computed: {
-    ...mapGetters(['test']),
-  },
+
   data() {
     return {
       user: {},
