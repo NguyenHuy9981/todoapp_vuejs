@@ -1,6 +1,15 @@
 <template>
   <div class="register">
     <div class="materialContainer">
+      <b-alert
+              :show="dismissCountDown"
+              dismissible
+              fade
+              variant="warning"
+              @dismiss-count-down="countDownChanged"
+            >
+              This alert will dismiss after {{ dismissCountDown }} seconds...
+            </b-alert>
       <form @submit.prevent="register()" class="box">
         <div class="title">ĐĂNG KÍ</div>
 
@@ -36,9 +45,17 @@
         </div>
 
         <div class="button login">
-          <button type="submit">
+          <b-button type="submit" >
             <span>GO</span> <i class="fa fa-check"></i>
-          </button>
+          </b-button>
+          <b-modal ref="my-modal" hide-footer title="Using Component Methods">
+            <div class="d-block text-center">
+              <h3>Tạo tài khoản thành công</h3>
+            </div>
+            <div class="alert"><b-button class="mt-2 " variant="success"
+            block @click="toggleModal">Đăng nhập</b-button></div>
+
+          </b-modal>
         </div>
 
         <a href="" class="pass-forgot">Forgot your password?</a>
@@ -48,28 +65,32 @@
 </template>
 
 <script>
-import api from '../api/auth';
-import { storageToken } from '../storage';
+import { mapActions } from 'vuex';
 
 export default {
   data() {
     return {
       user: {
-        name: null,
-        email: null,
-        password: null,
+        name: '',
+        email: '',
+        password: '',
       },
     };
   },
 
   methods: {
+    showModal() {
+      this.$refs['my-modal'].show();
+    },
+    toggleModal() {
+      this.$router.push({ name: 'Login' });
+    },
+
+    ...mapActions(['UserRegister']),
     async register() {
       try {
-        const result = await api.register(this.user);
-        storageToken.set(result.data.access_token);
-
-        // console.warn(result);
-        this.$router.push({ name: 'Login' });
+        await this.UserRegister(this.user);
+        this.showModal();
       } catch (error) {
         console.log('Loi');
       }
@@ -79,6 +100,10 @@ export default {
 </script>
 
 <style lang="scss">
+.alert{
+  margin-left: 10rem !important;
+
+}
 .box {
   position: relative;
   top: 0;

@@ -64,8 +64,9 @@ export default {
       const user = await apiUser.getMe();
       commit('SET_USER', user.data);
     },
-    UserRegister() {
-
+    async UserRegister(_, data) {
+      const result = await apiAuth.register(data);
+      return result;
     },
     UserUpdate() {
 

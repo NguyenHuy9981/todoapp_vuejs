@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   data() {
     return {
@@ -47,6 +49,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(['UserLogin']),
     async login() {
       try {
         await this.UserLogin(this.form);
