@@ -15,7 +15,7 @@
                   @click="job.selected = !job.selected"
                   :class="{ selected: job.selected }">
                     <td>
-                      <router-link :to="getRouterPath('todo')">
+                      <router-link :to="getRouterId('todo',job._id)">
                         {{ job.name }}
                       </router-link>
                     </td>

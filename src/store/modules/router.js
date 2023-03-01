@@ -5,11 +5,15 @@ export default {
     login: '/login',
     register: '/register',
     todo: '/todo',
+    todoId: '/todo',
     me: '/me',
   },
   getters: {
     getRouterPath(state) {
       return (name) => state[name];
+    },
+    getRouterId(state) {
+      return (name, id) => `${state[name]}/${id}`;
     },
   },
   actions: {
