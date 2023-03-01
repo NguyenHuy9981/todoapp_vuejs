@@ -32,6 +32,7 @@ module.exports = {
     'no-param-reassign': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/extensions': 'off',
+    'vue/multi-word-component-names': 'off',
     // 'import/order': 'off',
   },
 };

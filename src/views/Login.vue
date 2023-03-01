@@ -40,6 +40,7 @@
 import { mapActions } from 'vuex';
 
 export default {
+  name: 'LoginIndex',
   data() {
     return {
       form: {

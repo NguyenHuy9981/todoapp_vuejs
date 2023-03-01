@@ -15,6 +15,7 @@
 import TodoList from '../components/TodoList.vue';
 
 export default {
+  name: 'MeIndex',
   components: {
     TodoList,
   },
