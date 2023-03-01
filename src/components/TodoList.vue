@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>To Do List</h1>
+        <h1>To Do List ({{ getTodoCount }})</h1>
         <div v-if="isEditing" class="d-flex">
             <form-group id="input-group-2">
                 <b-form-input id="input-2" v-model="todo.name" placeholder="Enter name" required>
@@ -25,17 +25,24 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(job, index) in jobs" :key="index" @click="job.selected = !job.selected"
-                    :class="{ selected: job.selected }">
+                <tr
+                  v-for="(job) in getTodoList" :key="job._id"
+                  @click="job.selected = !job.selected"
+                  :class="{ selected: job.selected }">
                     <td>{{ job.name }}</td>
-                    <td>{{ job.status}}</td>
+                    <td>
+                      <div>
+                         <b-form-select v-model="job.status" :options="options"
+                         @change="changeStatus( job._id,job.status)"></b-form-select>
+                      </div>
+                    </td>
                     <td>
                         <a class="text-center" @click="editJob(job._id, job)">
                             <span class="fa fa-pen"></span>
                         </a>
                     </td>
                     <td>
-                        <a class="text-center" @click="deleteJob(index, job._id, job)">
+                        <a class="text-center" @click="TodoDelete(job._id)">
                             <span class="fa fa-trash"></span>
                         </a>
                     </td>
@@ -46,6 +53,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import api from '../api/todo';
 
 export default {
@@ -53,25 +61,35 @@ export default {
   data() {
     return {
       todo: {
-        name: null,
-        status: null,
+        name: '',
+        status: '',
       },
-      jobs: [],
       idJob: null,
       isEditing: false,
       upHere: false,
+      selected: null,
+      options: [
+        {
+          value: 'unfulfilled',
+          text: 'unfulfilled',
+        },
+        {
+          value: 'processing',
+          text: 'processing',
+        },
+        {
+          value: 'done',
+          text: 'done',
+        },
+      ],
     };
   },
   methods: {
+    ...mapActions(['TodoGetList', 'TodoCreate', 'TodoUpdate', 'TodoDelete', 'TodoGetId']),
     async onSubmit() {
       try {
-        const result = await api.create(this.todo);
+        const result = await this.TodoCreate(this.todo);
         console.log(result);
-
-        this.jobs.push({
-          name: this.todo.name,
-          status: 'unfulfilled',
-        });
       } catch (error) {
         console.log('Loi');
       }
@@ -80,6 +98,14 @@ export default {
       this.isEditing = true;
       this.todo = job;
       this.idJob = idJob;
+    },
+    async changeStatus(id, status) {
+      await this.TodoUpdate({
+        id,
+        update: {
+          status,
+        },
+      });
     },
     async updateJob(idJob) {
       try {
@@ -101,26 +127,17 @@ export default {
         console.log('Loi');
       }
     },
-    async deleteJob(index, idJob) {
-      try {
-        const resuilt = await api.delete(idJob);
-        this.jobs.splice(index, 1);
-        console.log(resuilt);
-      } catch (error) {
-        console.log('Loi');
-      }
-    },
+
   },
-  created() {
-    api.getList()
-      .then((response) => {
-        console.log(response);
-        this.jobs = response.data;
-      })
-      .catch((e) => {
-        console.error(e);
-      });
+  computed: mapGetters(['getTodoList', 'getTodoCount']),
+  async created() {
+    try {
+      await this.TodoGetList();
+    } catch (error) {
+      console.log('Loi');
+    }
   },
+
 };
 </script>
 
@@ -128,6 +145,5 @@ export default {
 <style scoped>
 a:hover {
   color: red;
-  cursor: pointer;
 }
 </style>
