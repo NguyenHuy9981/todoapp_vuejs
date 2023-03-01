@@ -1,6 +1,6 @@
 <template>
-  <div class="register">
-    <div class="materialContainer">
+  <div>
+    <div >
       <b-alert
               :show="dismissCountDown"
               dismissible
@@ -84,7 +84,7 @@ export default {
       this.$refs['my-modal'].show();
     },
     toggleModal() {
-      this.$router.push({ name: 'Login' });
+      this.RouterTo('login');
     },
 
     ...mapActions(['UserRegister']),

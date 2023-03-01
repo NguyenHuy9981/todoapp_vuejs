@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <header-auth />
+    <div>
+      <nav-bar />
+    </div>
     <div>
       <div class="row">
         <div class="col-lg-6" style="margin:auto">
@@ -17,11 +19,11 @@
 
 <script>
 
-import HeaderAuth from './components/Auth/Header.vue';
+import NavBar from './components/Layout/Nav.vue';
 
 export default {
   components: {
-    'header-auth': HeaderAuth,
+    'nav-bar': NavBar,
   },
 };
 </script>

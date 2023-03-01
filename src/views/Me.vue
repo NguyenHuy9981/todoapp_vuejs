@@ -19,7 +19,7 @@ export default {
   },
   created() {
     if (!this.getUserAuthed) {
-      this.$router.push({ name: 'Login' });
+      this.RouterTo('login');
     }
   },
 };

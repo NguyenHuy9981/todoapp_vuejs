@@ -14,7 +14,11 @@
                   v-for="(job) in getTodoList" :key="job._id"
                   @click="job.selected = !job.selected"
                   :class="{ selected: job.selected }">
-                    <td>{{ job.name }}</td>
+                    <td>
+                      <router-link :to="getRouterPath('todo')">
+                        {{ job.name }}
+                      </router-link>
+                    </td>
                     <td>
                       <div>
                          <b-form-select v-model="job.status" :options="getTodoStatus"

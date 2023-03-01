@@ -3,7 +3,8 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import storeGlobal from './store/register';
+import storeMixin from './store/mixin';
+import './router/middleware';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
@@ -12,7 +13,7 @@ import '@fortawesome/fontawesome-free/js/all.js';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
-Vue.mixin(storeGlobal);
+Vue.mixin(storeMixin);
 
 Vue.config.productionTip = false;
 

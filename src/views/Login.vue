@@ -54,7 +54,7 @@ export default {
     async login() {
       try {
         await this.UserLogin(this.form);
-        this.$router.push({ name: 'Me' });
+        this.RouterTo('me');
       } catch (error) {
         console.error(error);
         console.log('Lỗi');
