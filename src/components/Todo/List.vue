@@ -17,7 +17,7 @@
                     <td>{{ job.name }}</td>
                     <td>
                       <div>
-                         <b-form-select v-model="job.status" :options="options"
+                         <b-form-select v-model="job.status" :options="getTodoStatus"
                          @change="changeStatus( job._id,job.status)"></b-form-select>
                       </div>
                     </td>
@@ -52,20 +52,6 @@ export default {
       isEditing: false,
       upHere: false,
       selected: null,
-      options: [
-        {
-          value: 'unfulfilled',
-          text: 'unfulfilled',
-        },
-        {
-          value: 'processing',
-          text: 'processing',
-        },
-        {
-          value: 'done',
-          text: 'done',
-        },
-      ],
     };
   },
   methods: {

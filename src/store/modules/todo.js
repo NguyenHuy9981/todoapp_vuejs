@@ -3,6 +3,25 @@ import api from '../../api/todo';
 export default {
   state: {
     list: [],
+    filter: {
+
+    },
+    option: {
+      status: [
+        {
+          value: 'unfulfilled',
+          text: 'unfulfilled',
+        },
+        {
+          value: 'processing',
+          text: 'processing',
+        },
+        {
+          value: 'done',
+          text: 'done',
+        },
+      ],
+    },
   },
   getters: {
     getTodoList(state) {
@@ -11,7 +30,9 @@ export default {
     getTodoCount(state) {
       return state.list.length;
     },
-
+    getTodoStatus(state) {
+      return state.option.status;
+    },
   },
   mutations: {
     SET_LIST(state, list) {
@@ -32,10 +53,16 @@ export default {
         };
       }
     },
+    SET_FILTER(state, filter) {
+      state.filter = filter;
+    },
+    SET_SEARCH(state, search) {
+      state.filter = search;
+    },
   },
   actions: {
-    async TodoGetList({ commit }) {
-      const result = await api.getList();
+    async TodoGetList({ commit, state }) {
+      const result = await api.getList(state.filter);
 
       if (result.success) {
         commit('SET_LIST', result.data);
@@ -66,6 +93,17 @@ export default {
         });
       }
       return result;
+    },
+    async TodoFilter({ commit, dispatch }, data) {
+      commit('SET_FILTER', data);
+
+      return dispatch('TodoGetList');
+    },
+
+    async TodoSearch({ commit, dispatch }, data) {
+      commit('SET_SEARCH', data);
+
+      return dispatch('TodoGetList');
     },
     TodoGetId() {
 

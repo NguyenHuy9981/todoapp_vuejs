@@ -16,6 +16,9 @@
                         placeholder="Enter Description"
                         required>
                     </b-form-textarea>
+                    <b-form-select v-model="form.status" :options="getTodoStatus">
+                      <b-form-select-option :value="''">Chọn trạng thái</b-form-select-option>
+                    </b-form-select>
                 </b-form-group>
             </div>
         </b-modal>
@@ -31,6 +34,7 @@ export default {
       form: {
         name: '',
         description: '',
+        status: '',
       },
     };
   },
