@@ -1,10 +1,15 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from '../store';
+
 import HomeView from '../views/Home.vue';
 import RegisterView from '../views/Register.vue';
 import LoginView from '../views/Login.vue';
 import MeView from '../views/Me.vue';
-import store from '../store';
+import TodoIndex from '../views/Todo/Index.vue';
+import TodoDetail from '../views/Todo/Detail.vue';
+
+import Error404 from '../views/Error404.vue';
 
 Vue.use(VueRouter);
 
@@ -29,6 +34,21 @@ const routes = [
     name: 'Me',
     component: MeView,
   },
+  {
+    path: '/todo',
+    name: 'TodoIndex',
+    component: TodoIndex,
+  },
+  {
+    path: '/todo/:id',
+    name: 'TodoDetail',
+    component: TodoDetail,
+  },
+  {
+    path: '*',
+    name: 'Error Page',
+    component: Error404,
+  },
 ];
 
 const router = new VueRouter({
@@ -46,4 +66,5 @@ router.beforeEach(async (to, from, next) => {
   }
   next();
 });
+
 export default router;

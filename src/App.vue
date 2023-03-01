@@ -1,17 +1,27 @@
 <template>
   <div id="app">
-    <HeaderAuth />
-    <router-view />
+    <header-auth />
+    <div>
+      <div class="row">
+        <div class="col-lg-6" style="margin:auto">
+          <div class="me mt-4">
+            <div class="card ml-5" style="min-height: 500px;">
+              <router-view />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 
-import HeaderAuth from './components/auth/HeaderAuth.vue';
+import HeaderAuth from './components/Auth/Header.vue';
 
 export default {
   components: {
-    HeaderAuth,
+    'header-auth': HeaderAuth,
   },
 };
 </script>

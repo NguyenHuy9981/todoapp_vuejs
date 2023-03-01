@@ -54,7 +54,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import api from '../api/todo';
 
 export default {
   name: 'TodoList',
@@ -107,25 +106,8 @@ export default {
         },
       });
     },
-    async updateJob(idJob) {
-      try {
-        const resuilt = await api.update(
-          idJob,
-          {
-            name: this.todo.name,
-          },
-        );
-        console.log(resuilt);
-
-        this.isEditing = false;
-        this.todo = {
-          name: null,
-          status: null,
-        };
-        this.idJob = !idJob;
-      } catch (error) {
-        console.log('Loi');
-      }
+    async updateJob() {
+      // TODO: Update Job
     },
 
   },
