@@ -1,20 +1,5 @@
 <template>
     <div>
-        <h1>To Do List ({{ getTodoCount }})</h1>
-        <div v-if="isEditing" class="d-flex">
-            <form-group id="input-group-2">
-                <b-form-input id="input-2" v-model="todo.name" placeholder="Enter name" required>
-                </b-form-input>
-            </form-group>
-            <b-button @click="updateJob(idJob)" variant="success" class="mx-2">Sửa</b-button>
-        </div>
-        <div v-else @submit="onSubmit" class="d-flex">
-            <b-form-group id="input-group-2">
-                <b-form-input id="input-2" v-model="todo.name" placeholder="Enter name" required>
-                </b-form-input>
-            </b-form-group>
-            <b-button @click="onSubmit" variant="primary" class="mx-2">Thêm</b-button>
-        </div>
         <table class="table table-bordered mt-4">
             <thead>
                 <tr>
@@ -53,7 +38,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'TodoList',
@@ -84,20 +69,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['TodoGetList', 'TodoCreate', 'TodoUpdate', 'TodoDelete', 'TodoGetId']),
-    async onSubmit() {
-      try {
-        const result = await this.TodoCreate(this.todo);
-        console.log(result);
-      } catch (error) {
-        console.log('Loi');
-      }
-    },
-    editJob(idJob, job) {
-      this.isEditing = true;
-      this.todo = job;
-      this.idJob = idJob;
-    },
+    ...mapActions(['TodoGetList', 'TodoUpdate', 'TodoDelete']),
     async changeStatus(id, status) {
       await this.TodoUpdate({
         id,
@@ -106,12 +78,7 @@ export default {
         },
       });
     },
-    async updateJob() {
-      // TODO: Update Job
-    },
-
   },
-  computed: mapGetters(['getTodoList', 'getTodoCount']),
   async created() {
     try {
       await this.TodoGetList();

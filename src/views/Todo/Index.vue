@@ -1,5 +1,8 @@
 <template>
     <div>
+      <div>
+        <h1>To Do List ({{ getTodoCount }})</h1>
+      </div>
       <create />
       <filter-bar />
       <list />
