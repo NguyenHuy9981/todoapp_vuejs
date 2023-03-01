@@ -17,4 +17,7 @@ export default {
   async delete(id) {
     return api.delete(`${router}/${id}`);
   },
+  async detail(id) {
+    return api.get(`${router}/${id}`);
+  },
 };

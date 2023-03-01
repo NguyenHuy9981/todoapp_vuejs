@@ -3,6 +3,7 @@ import api from '../../api/todo';
 export default {
   state: {
     list: [],
+    job: {},
     filter: {
 
     },
@@ -33,6 +34,9 @@ export default {
     getTodoStatus(state) {
       return state.option.status;
     },
+    getTodoDetail(state) {
+      return state.job;
+    },
   },
   mutations: {
     SET_LIST(state, list) {
@@ -45,12 +49,12 @@ export default {
       state.list.unshift(newJob);
     },
     UPDATE_JOB(state, { id, update }) {
-      const jobIndex = state.list.findIndex((item) => item._id === id);
-      if (jobIndex !== -1) {
-        state.list[jobIndex] = {
-          ...state[jobIndex],
-          ...update,
-        };
+      const job = state.list.find((item) => item._id === id);
+      if (job) {
+        Object.entries(update).forEach((entry) => {
+          const [key, value] = entry;
+          job[key] = value;
+        });
       }
     },
     SET_FILTER(state, filter) {
@@ -58,6 +62,9 @@ export default {
     },
     SET_SEARCH(state, search) {
       state.filter = search;
+    },
+    SET_JOB(state, job) {
+      state.job = job;
     },
   },
   actions: {
@@ -86,10 +93,14 @@ export default {
     },
     async TodoUpdate({ commit }, { id, update }) {
       const result = await api.update(id, update);
+
       if (result.success) {
         commit('UPDATE_JOB', {
           id,
-          update,
+          update: {
+            ...update,
+            ...result.data,
+          },
         });
       }
       return result;
@@ -99,14 +110,18 @@ export default {
 
       return dispatch('TodoGetList');
     },
-
     async TodoSearch({ commit, dispatch }, data) {
       commit('SET_SEARCH', data);
 
       return dispatch('TodoGetList');
     },
-    TodoGetId() {
+    async TodoGetId({ commit }, id) {
+      const result = await api.detail(id);
+      if (result.success) {
+        commit('SET_JOB', result.data);
+      }
 
+      return result.data;
     },
   },
 };
