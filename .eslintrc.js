@@ -27,6 +27,7 @@ module.exports = {
       { allowMultiplePropertiesPerLine: false },
     ],
     'no-plusplus': 'off',
+    'no-empty-pattern': 'off',
     'quote-props': 'off',
     'no-throw-literal': 'off',
     'no-param-reassign': 'off',

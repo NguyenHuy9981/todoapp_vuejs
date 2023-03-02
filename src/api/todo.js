@@ -20,4 +20,17 @@ export default {
   async detail(id) {
     return api.get(`${router}/${id}`);
   },
+  async createComment(jobId, data) {
+    return api.post(`${router}/comment/create`, {
+      jobId,
+      ...data,
+    });
+  },
+  async listComment(id) {
+    return api.get(`${router}/comment/${id}`);
+  },
+
+  // async deleteComment(id) {
+
+  // },
 };

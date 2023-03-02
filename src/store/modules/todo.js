@@ -38,6 +38,9 @@ export default {
     getTodoDetail(state) {
       return state.job;
     },
+    getCommentList(state) {
+      return state.listComment;
+    },
   },
   mutations: {
     SET_LIST(state, list) {
@@ -66,6 +69,9 @@ export default {
     },
     SET_JOB(state, job) {
       state.job = job;
+    },
+    SET_COMMENT(state, listComment) {
+      state.listComment = listComment;
     },
   },
   actions: {
@@ -120,6 +126,18 @@ export default {
       const result = await api.detail(id);
       if (result.success) {
         commit('SET_JOB', result.data);
+      }
+
+      return result.data;
+    },
+    async TodoCreateComment({}, { jobId, data }) {
+      const result = await api.createComment(jobId, data);
+      return result.data;
+    },
+    async TodoListComment({ commit }, jobId) {
+      const result = await api.listComment(jobId);
+      if (result.success) {
+        commit('SET_COMMENT', result.data);
       }
 
       return result.data;
