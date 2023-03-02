@@ -3,6 +3,7 @@ import api from '../../api/todo';
 export default {
   state: {
     list: [],
+    listComment: [],
     job: {},
     filter: {
 
