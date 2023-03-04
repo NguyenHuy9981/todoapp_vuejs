@@ -26,6 +26,9 @@ export default {
       ...data,
     });
   },
+  async deleteComment(commentId) {
+    return api.delete(`${router}/comment/${commentId}`);
+  },
   async listComment(id) {
     return api.get(`${router}/comment/${id}`);
   },

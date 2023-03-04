@@ -14,8 +14,11 @@
             </span>
               <div class="d-flex justify-content-between py-1 pt-2" >
                   <div><img src="https://i.imgur.com/AgAC1Is.jpg" width="18"><span class="text2">Martha</span></div>
-                  <div><span class="text3">Upvote?</span><span class="thumbup">
-                    <i class="fa fa-thumbs-o-up"></i></span><span class="text4">3</span></div>
+                  <div>
+                    <a class="text-center" @click="deleteComment(comment._id)">
+                        <span class="fa fa-trash"></span>
+                    </a>
+                  </div>
               </div>
           </div>
       </div>
@@ -44,7 +47,7 @@ export default {
     ...mapGetters(['getCommentList']),
   },
   methods: {
-    ...mapActions(['TodoListComment', 'TodoCreateComment']),
+    ...mapActions(['TodoListComment', 'TodoCreateComment', 'TodoDeleteComment']),
     getComment() {
       console.log(this.todoId);
 
@@ -53,12 +56,14 @@ export default {
     postComment() {
       const newData = {
         'jobId': this.todoId,
-        'data':
-        {
+        'data': {
           content: this.text,
         },
       };
       this.TodoCreateComment(newData);
+    },
+    deleteComment(commentId) {
+      this.TodoDeleteComment(commentId);
     },
   },
   created() {
@@ -72,6 +77,10 @@ export default {
 </script>
 
 <style scoped>
+a:hover {
+    color: red;
+    cursor: pointer;
+}
 body{
 background-color: #fff;
 }

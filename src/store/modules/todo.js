@@ -73,6 +73,12 @@ export default {
     SET_COMMENT(state, listComment) {
       state.listComment = listComment;
     },
+    CREATE_COMMENT(state, newComment) {
+      state.listComment.unshift(newComment);
+    },
+    DELETE_COMMENT(state, id) {
+      state.listComment = state.listComment.filter((comment) => comment._id !== id);
+    },
   },
   actions: {
     async TodoGetList({ commit, state }) {
@@ -128,10 +134,20 @@ export default {
         commit('SET_JOB', result.data);
       }
 
+      return result;
+    },
+    async TodoCreateComment({ commit }, { jobId, data }) {
+      const result = await api.createComment(jobId, data);
+      if (result.success) {
+        commit('CREATE_COMMENT', result.data);
+      }
       return result.data;
     },
-    async TodoCreateComment({}, { jobId, data }) {
-      const result = await api.createComment(jobId, data);
+    async TodoDeleteComment({ commit }, commentId) {
+      const result = await api.deleteComment(commentId);
+      if (result.success) {
+        commit('DELETE_COMMENT', commentId);
+      }
       return result.data;
     },
     async TodoListComment({ commit }, jobId) {

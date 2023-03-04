@@ -92,5 +92,6 @@ export default {
 <style scoped>
 a:hover {
     color: red;
+    cursor: pointer;
 }
 </style>

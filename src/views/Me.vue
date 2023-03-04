@@ -17,11 +17,6 @@ export default {
       user: {},
     };
   },
-  created() {
-    if (!this.getUserAuthed) {
-      this.RouterTo('login');
-    }
-  },
 };
 </script>
 
