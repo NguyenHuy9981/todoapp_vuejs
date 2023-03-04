@@ -26,6 +26,9 @@
       <div>
         <comment-box :todoId="id"/>
       </div>
+      <div>
+        <File :todoId="id"/>
+      </div>
 
   </div>
 </template>
@@ -33,11 +36,13 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import Comment from '../../components/Todo/Comment.vue';
+import File from '../../components/Todo/File.vue';
 
 export default {
   name: 'TodoDetail',
   components: {
     'comment-box': Comment,
+    File,
   },
   data() {
     return {
@@ -52,8 +57,15 @@ export default {
   },
   methods: {
     ...mapActions(['TodoGetId']),
-    getDetail() {
-      this.TodoGetId(this.id);
+    async getDetail() {
+      try {
+        const result = await this.TodoGetId(this.id);
+        if (!result.data) {
+          throw new Error('TODO_EMPTY');
+        }
+      } catch (error) {
+        this.RouterTo('notFound');
+      }
     },
   },
   created() {

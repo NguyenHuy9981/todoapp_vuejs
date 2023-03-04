@@ -7,6 +7,7 @@ export default {
     todo: '/todo',
     todoId: '/todo',
     me: '/me',
+    notFound: '/error/404',
   },
   getters: {
     getRouterPath(state) {

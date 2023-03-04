@@ -44,6 +44,11 @@ const routes = [
     component: TodoDetail,
   },
   {
+    path: '/error/404',
+    name: 'Error Page',
+    component: Error404,
+  },
+  {
     path: '*',
     name: 'Error Page',
     component: Error404,

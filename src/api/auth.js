@@ -11,7 +11,14 @@ export default {
     });
   },
   async register(data) {
-    return api.post(`${router}/register`, data);
+    return api.post(`${router}/register`, data, {
+      params: {
+        version: '1.0',
+      },
+      headers: {
+        version: '1.0',
+      },
+    });
   },
   async forgotPassRequest(data) {
     return api.post(`${router}/forgotPassRequest`, data);
