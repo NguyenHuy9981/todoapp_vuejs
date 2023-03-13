@@ -1,0 +1,7 @@
+version: '3'
+services:
+  todo-app-web:
+    build: .
+    image: huydev/todo-app:web
+    ports:
+      - 8080:80
