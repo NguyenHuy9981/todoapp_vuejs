@@ -9,17 +9,6 @@
           ĐỔI MẬT KHẨU
         </div>
 
-        <p v-if="errors.length">
-          <b>Please correct the following error(s):</b>
-          <ul>
-            <li
-              v-for="(error,index) in errors"
-              :key="index"
-            >
-              {{ error }}
-            </li>
-          </ul>
-        </p>
         <div class="input">
           <input
             v-model="form.oldPass"
@@ -39,11 +28,16 @@
         </div>
 
         <div class="button login">
-          <button type="submit">
+          <button
+            type="submit"
+            :disabled="!form.newPass || !form.oldPass"
+          >
             <span>GO</span> <i class="fa fa-check" />
           </button>
         </div>
-
+        <div class="text-danger">
+          {{ errorMsg }}
+        </div>
         <a
           href=""
           class="pass-forgot"
@@ -60,7 +54,7 @@ export default {
   name: 'LoginIndex',
   data() {
     return {
-      errors: [],
+      errorMsg: '',
       form: {
         oldPass: '',
         newPass: '',
@@ -70,27 +64,17 @@ export default {
   methods: {
     ...mapActions(['UserchangePass']),
 
-    checkForm() {
-      this.errors = [];
-
-      if (!this.form.oldPass) {
-        this.errors.push('Mật khẩu cũ không được để trống');
-      }
-      if (!this.form.newPass) {
-        this.errors.push('Mật khẩu mới không được để trống');
-      }
-    },
-
-    async changePass(e) {
+    async changePass() {
       try {
-        this.checkForm(e);
-        console.log('haha');
-        this.UserchangePass(this.form);
-
-        this.RouterTo('me');
+        const result = await this.UserchangePass(this.form);
+        if (!result.success) {
+          this.errorMsg = result.message;
+        } else {
+          this.UserLogout();
+          this.RouterTo('me');
+        }
       } catch (error) {
         console.error(error);
-        console.log('Lỗi');
       }
     },
   },

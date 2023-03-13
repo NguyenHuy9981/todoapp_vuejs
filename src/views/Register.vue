@@ -1,15 +1,6 @@
 <template>
   <div>
     <div>
-      <b-alert
-        :show="dismissCountDown"
-        dismissible
-        fade
-        variant="warning"
-        @dismiss-count-down="countDownChanged"
-      >
-        This alert will dismiss after {{ dismissCountDown }} seconds...
-      </b-alert>
       <form
         class="box"
         @submit.prevent="register()"
