@@ -18,7 +18,19 @@
       :key="item._id"
       class="image"
     >
-      <img :src="item.url">
+      <img
+        v-if="isFileImage(item)"
+        :src="item.url"
+      >
+      <div v-else>
+        <a
+          target="_blank"
+          :href="item.url"
+          :download="item.name"
+        >
+          {{ item.name }}
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -61,23 +73,20 @@ export default {
         this.listFile.push(result.data);
       }
     },
-
+    isFileImage(item) {
+      return item.type === 'image/jpeg';
+    },
   },
   computed: {
     listFileShow() {
       return this.listFile.map((attachment) => ({
         ...attachment,
-        url: this.getPathUrl(attachment.path),
+        url: this.getPathUrl(attachment.fileName),
       }));
     },
   },
   created() {
-    try {
-      this.getJob();
-      this.getFile();
-    } catch (error) {
-      console.log('Lỗi');
-    }
+    this.getJob();
   },
 };
 </script>
