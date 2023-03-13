@@ -24,6 +24,7 @@ export default {
         },
       ],
     },
+    listFile: [],
   },
   getters: {
     getTodoList(state) {
@@ -78,6 +79,9 @@ export default {
     },
     DELETE_COMMENT(state, id) {
       state.listComment = state.listComment.filter((comment) => comment._id !== id);
+    },
+    SET_FILE(state, listFile) {
+      state.listFile = listFile;
     },
   },
   actions: {
@@ -154,6 +158,22 @@ export default {
       const result = await api.listComment(jobId);
       if (result.success) {
         commit('SET_COMMENT', result.data);
+      }
+
+      return result.data;
+    },
+    async TodoUploadFile({ }, formData) {
+      const result = await api.uploadFile(formData);
+      return result;
+    },
+    async TodoAddFile({ }, { id, fileRef }) {
+      const result = await api.addFile(id, fileRef);
+      return result;
+    },
+    async TodoListFile({ commit }, jobId) {
+      const result = await api.listComment(jobId);
+      if (result.success) {
+        commit('SET_FILE', result.data);
       }
 
       return result.data;

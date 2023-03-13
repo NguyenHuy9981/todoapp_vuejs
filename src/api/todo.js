@@ -32,8 +32,19 @@ export default {
   async listComment(id) {
     return api.get(`${router}/comment/${id}`);
   },
-
-  // async deleteComment(id) {
-
-  // },
+  async uploadFile(formData) {
+    return api.post(`${router}/file/create`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
+  async addFile(id, fileRef) {
+    return api.put(`${router}/addFile/${id}`, {
+      fileRef,
+    });
+  },
+  async getfile(id) {
+    return api.get(`${router}/file/${id}`);
+  },
 };

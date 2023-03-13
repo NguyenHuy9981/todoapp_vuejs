@@ -20,6 +20,6 @@ export default {
     'getTodoStatus',
     'getRouterPath',
     'getRouterId',
-    'getFilePath',
+    'getPathUrl',
   ]),
 };

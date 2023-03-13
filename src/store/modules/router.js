@@ -18,7 +18,7 @@ export default {
     getRouterId(state) {
       return (name, id) => `${state[name]}/${id}`;
     },
-    getFilePath() {
+    getPathUrl() {
       return (file) => `${staticBase}/${file}`;
     },
   },

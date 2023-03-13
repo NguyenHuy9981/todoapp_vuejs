@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding-bottom: 100px;">
       <div>
         <label for="">Tiêu đề</label>
         <div class="row">
