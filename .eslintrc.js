@@ -4,7 +4,7 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'plugin:vue/vue3-essential',
+    'plugin:vue/vue3-recommended',
     'airbnb-base',
   ],
   overrides: [
@@ -34,6 +34,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'import/extensions': 'off',
     'vue/multi-word-component-names': 'off',
+    'vue/order-in-components': 'off',
     // 'import/order': 'off',
   },
 };

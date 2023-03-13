@@ -1,18 +1,37 @@
 <template>
   <div class="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <span v-if="getUserAuthed"  class="ml-5">
-            <router-link :to="getRouterPath('todo')">Todo App</router-link>
+      <span
+        v-if="getUserAuthed"
+        class="ml-5"
+      >
+        <router-link :to="getRouterPath('todo')">Todo App</router-link>
       </span>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div
+        id="navbarSupportedContent"
+        class="collapse navbar-collapse"
+      >
         <ul class="navbar-nav ml-auto right">
-          <li v-if="!getUserAuthed" class="nav-item ml-3 mr-3 distance">
-            <router-link :to="getRouterPath('login')">Đăng nhập</router-link>
+          <li
+            v-if="!getUserAuthed"
+            class="nav-item ml-3 mr-3 distance"
+          >
+            <router-link :to="getRouterPath('login')">
+              Đăng nhập
+            </router-link>
           </li>
-          <li v-if="!getUserAuthed" class="nav-item ml-3 mr-3 distance">
-            <router-link :to="getRouterPath('register')">Đăng kí</router-link>
+          <li
+            v-if="!getUserAuthed"
+            class="nav-item ml-3 mr-3 distance"
+          >
+            <router-link :to="getRouterPath('register')">
+              Đăng kí
+            </router-link>
           </li>
-          <li v-show="getUserAuthed" class="nav-item dropdown">
+          <li
+            v-show="getUserAuthed"
+            class="nav-item dropdown"
+          >
             <a
               class="nav-link dropdown-toggle"
               href=""
@@ -23,14 +42,24 @@
             >
               {{ getUserName }}
             </a>
-            <div class="dropdown-menu mr-3" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#" @click="changePass()">Đổi mật khẩu</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#" @click="logout()">Đăng xuất</a>
+            <div
+              class="dropdown-menu mr-3"
+              aria-labelledby="navbarDropdown"
+            >
+              <a
+                class="dropdown-item"
+                href="#"
+                @click="changePass()"
+              >Đổi mật khẩu</a>
+              <div class="dropdown-divider" />
+              <a
+                class="dropdown-item"
+                href="#"
+                @click="logout()"
+              >Đăng xuất</a>
             </div>
           </li>
         </ul>
-
       </div>
     </nav>
   </div>

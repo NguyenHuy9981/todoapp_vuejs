@@ -1,18 +1,26 @@
 <template>
-    <div>
-      <b-form-file
+  <div>
+    <b-form-file
       v-model="fileUpload"
       :state="Boolean(fileState)"
       placeholder="Choose a file or drop it here..."
       drop-placeholder="Drop file here..."
-      > </b-form-file>
-      <b-button class="mb-4" variant="success" @click="onUploadFile">Thêm </b-button>
-      <div class="image">
-      <img  v-for="(item) in listFileShow" :key="item._id"
-        :src="item.url" />
-      </div>
-
+    />
+    <b-button
+      class="mb-4"
+      variant="success"
+      @click="onUploadFile"
+    >
+      Thêm
+    </b-button>
+    <div
+      v-for="(item) in listFileShow"
+      :key="item._id"
+      class="image"
+    >
+      <img :src="item.url">
     </div>
+  </div>
 </template>
 
 <script>
@@ -55,14 +63,6 @@ export default {
     },
 
   },
-  created() {
-    try {
-      this.getJob();
-      this.getFile();
-    } catch (error) {
-      console.log('Lỗi');
-    }
-  },
   computed: {
     listFileShow() {
       return this.listFile.map((attachment) => ({
@@ -70,6 +70,14 @@ export default {
         url: this.getPathUrl(attachment.path),
       }));
     },
+  },
+  created() {
+    try {
+      this.getJob();
+      this.getFile();
+    } catch (error) {
+      console.log('Lỗi');
+    }
   },
 };
 </script>

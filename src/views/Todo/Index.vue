@@ -1,12 +1,12 @@
 <template>
+  <div>
     <div>
-      <div>
-        <h1>To Do List ({{ getTodoCount }})</h1>
-      </div>
-      <create />
-      <filter-bar />
-      <list />
+      <h1>To Do List ({{ getTodoCount }})</h1>
     </div>
+    <create />
+    <filter-bar />
+    <list />
+  </div>
 </template>
 
 <script>

@@ -2,25 +2,40 @@
   <div>
     <div class="container justify-content-center mt-5 border-left border-right">
       <div class="d-flex justify-content-center pt-3 pb-2">
-        <input type="text" placeholder="Comment" class="form-control"
-           v-model="text"
-          @keyup.enter="postComment" >
+        <input
+          v-model="text"
+          type="text"
+          placeholder="Comment"
+          class="form-control"
+          @keyup.enter="postComment"
+        >
       </div>
-      <div class="d-flex justify-content-center py-2"
-        v-for="(comment) in getCommentList" :key="comment._id">
-          <div class="second py-2 px-2">
-            <span class="text1">
-              {{ comment.content }}
-            </span>
-              <div class="d-flex justify-content-between py-1 pt-2" >
-                  <div><img src="https://i.imgur.com/AgAC1Is.jpg" width="18"><span class="text2">Martha</span></div>
-                  <div>
-                    <a class="text-center" @click="deleteComment(comment._id)">
-                        <span class="fa fa-trash"></span>
-                    </a>
-                  </div>
-              </div>
+      <div
+        v-for="(comment) in getCommentList"
+        :key="comment._id"
+        class="d-flex justify-content-center py-2"
+      >
+        <div class="second py-2 px-2">
+          <span class="text1">
+            {{ comment.content }}
+          </span>
+          <div class="d-flex justify-content-between py-1 pt-2">
+            <div>
+              <img
+                src="https://i.imgur.com/AgAC1Is.jpg"
+                width="18"
+              ><span class="text2">Martha</span>
+            </div>
+            <div>
+              <a
+                class="text-center"
+                @click="deleteComment(comment._id)"
+              >
+                <span class="fa fa-trash" />
+              </a>
+            </div>
           </div>
+        </div>
       </div>
     </div>
   </div>

@@ -5,9 +5,15 @@
     </div>
     <div>
       <div class="row">
-        <div class="col-lg-6" style="margin:auto">
+        <div
+          class="col-lg-6"
+          style="margin:auto"
+        >
           <div class=" mt-4">
-            <div class="card " style="min-height: 500px;margin-bottom: 50px;">
+            <div
+              class="card "
+              style="min-height: 500px;margin-bottom: 50px;"
+            >
               <router-view />
             </div>
           </div>

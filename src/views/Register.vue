@@ -1,64 +1,83 @@
 <template>
   <div>
-    <div >
+    <div>
       <b-alert
-              :show="dismissCountDown"
-              dismissible
-              fade
-              variant="warning"
-              @dismiss-count-down="countDownChanged"
-            >
-              This alert will dismiss after {{ dismissCountDown }} seconds...
-            </b-alert>
-      <form @submit.prevent="register()" class="box">
-        <div class="title">ĐĂNG KÍ</div>
+        :show="dismissCountDown"
+        dismissible
+        fade
+        variant="warning"
+        @dismiss-count-down="countDownChanged"
+      >
+        This alert will dismiss after {{ dismissCountDown }} seconds...
+      </b-alert>
+      <form
+        class="box"
+        @submit.prevent="register()"
+      >
+        <div class="title">
+          ĐĂNG KÍ
+        </div>
 
         <div class="input">
           <input
+            id="name"
+            v-model="user.name"
             type="text"
             name="name"
-            v-model="user.name"
-            id="name"
             placeholder="Tên"
-          />
+          >
         </div>
 
         <div class="input">
           <input
+            id="email"
+            v-model="user.email"
             type="email"
             name="email"
-            v-model="user.email"
-            id="email"
             placeholder="Email"
-          />
+          >
         </div>
 
         <div class="input">
           <input
+            id="pass"
+            v-model="user.password"
             type="password"
             name="password"
-            v-model="user.password"
-            id="pass"
             placeholder="Password"
-          />
-          <span class="spin"></span>
+          >
+          <span class="spin" />
         </div>
 
         <div class="button login">
-          <b-button type="submit" >
-            <span>GO</span> <i class="fa fa-check"></i>
+          <b-button type="submit">
+            <span>GO</span> <i class="fa fa-check" />
           </b-button>
-          <b-modal ref="my-modal" hide-footer title="Using Component Methods">
+          <b-modal
+            ref="my-modal"
+            hide-footer
+            title="Using Component Methods"
+          >
             <div class="d-block text-center">
               <h3>Tạo tài khoản thành công</h3>
             </div>
-            <div class="alert"><b-button class="mt-2 " variant="success"
-            block @click="toggleModal">Đăng nhập</b-button></div>
-
+            <div class="alert">
+              <b-button
+                class="mt-2 "
+                variant="success"
+                block
+                @click="toggleModal"
+              >
+                Đăng nhập
+              </b-button>
+            </div>
           </b-modal>
         </div>
 
-        <a href="" class="pass-forgot">Forgot your password?</a>
+        <a
+          href=""
+          class="pass-forgot"
+        >Forgot your password?</a>
       </form>
     </div>
   </div>

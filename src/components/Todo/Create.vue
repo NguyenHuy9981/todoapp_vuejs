@@ -1,28 +1,42 @@
 <template>
-    <div>
-        <b-button variant="primary" class="mx-2" style="float:right" @click="show =true">
-            Tao moi
-        </b-button>
-        <b-modal v-model="show" title="BootstrapVue" @ok="onSubmit">
-            <div  @submit="onSubmit">
-                <b-form-group id="input-group-2">
-                    <b-form-input
-                        v-model="form.name"
-                        placeholder="Enter name"
-                        required>
-                    </b-form-input>
-                    <b-form-textarea
-                        v-model="form.description"
-                        placeholder="Enter Description"
-                        required>
-                    </b-form-textarea>
-                    <b-form-select v-model="form.status" :options="getTodoStatus">
-                      <b-form-select-option :value="''">Chọn trạng thái</b-form-select-option>
-                    </b-form-select>
-                </b-form-group>
-            </div>
-        </b-modal>
-    </div>
+  <div>
+    <b-button
+      variant="primary"
+      class="mx-2"
+      style="float:right"
+      @click="show =true"
+    >
+      Tao moi
+    </b-button>
+    <b-modal
+      v-model="show"
+      title="BootstrapVue"
+      @ok="onSubmit"
+    >
+      <div @submit="onSubmit">
+        <b-form-group id="input-group-2">
+          <b-form-input
+            v-model="form.name"
+            placeholder="Enter name"
+            required
+          />
+          <b-form-textarea
+            v-model="form.description"
+            placeholder="Enter Description"
+            required
+          />
+          <b-form-select
+            v-model="form.status"
+            :options="getTodoStatus"
+          >
+            <b-form-select-option :value="''">
+              Chọn trạng thái
+            </b-form-select-option>
+          </b-form-select>
+        </b-form-group>
+      </div>
+    </b-modal>
+  </div>
 </template>
 
 <script>
