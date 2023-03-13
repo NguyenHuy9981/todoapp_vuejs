@@ -27,6 +27,12 @@ export default {
     getUserDetail(state) {
       return state.detail;
     },
+    getUserRole(state) {
+      return state.detail.role;
+    },
+    getIsAdmin(state) {
+      return (state.detail.role && state.detail.role === 'admin');
+    },
   },
   mutations: {
     SET_LOGIN(state, token) {

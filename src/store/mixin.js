@@ -21,5 +21,7 @@ export default {
     'getRouterPath',
     'getRouterId',
     'getPathUrl',
+    'getUserRole',
+    'getIsAdmin',
   ]),
 };
