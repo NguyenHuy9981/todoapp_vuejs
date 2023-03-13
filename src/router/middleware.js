@@ -3,8 +3,9 @@ import router from './index';
 
 let isInited = false;
 
-const authList = ['/login', '/register'];
-const whiteList = [...authList, '/'];
+const authList = ['/login', '/register', '/forgotPass'];
+const publicList = [...authList, '/'];
+const adminList = ['/admin'];
 
 router.beforeEach(async (to, from, next) => {
   const { path } = to;
@@ -16,8 +17,10 @@ router.beforeEach(async (to, from, next) => {
 
   if (store.getters.getUserAuthed && authList.includes(path)) {
     next('/me');
-  } else if (!whiteList.includes(path) && !store.getters.getUserAuthed) {
+  } else if (!store.getters.getUserAuthed && !publicList.includes(path)) {
     next('/login');
+  } else if (!store.getters.getIsAdmin && adminList.includes(path)) {
+    next('/404');
   } else {
     next();
   }
