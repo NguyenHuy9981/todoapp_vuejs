@@ -5,6 +5,7 @@ import HomeView from '../views/Home.vue';
 import RegisterView from '../views/Register.vue';
 import LoginView from '../views/Login.vue';
 import MeView from '../views/Me.vue';
+import ChangePass from '../views/ChangePass.vue';
 import TodoIndex from '../views/Todo/Index.vue';
 import TodoDetail from '../views/Todo/Detail.vue';
 
@@ -32,6 +33,11 @@ const routes = [
     path: '/me',
     name: 'Me',
     component: MeView,
+  },
+  {
+    path: '/changePass',
+    name: 'ChangePass',
+    component: ChangePass,
   },
   {
     path: '/todo',

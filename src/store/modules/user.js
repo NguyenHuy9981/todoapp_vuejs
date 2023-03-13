@@ -68,8 +68,9 @@ export default {
       const result = await apiAuth.register(data);
       return result;
     },
-    UserUpdate() {
-
+    async UserchangePass({}, data) {
+      const result = await apiUser.changePassword(data);
+      return result;
     },
   },
 };

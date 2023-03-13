@@ -24,6 +24,8 @@
               {{ getUserName }}
             </a>
             <div class="dropdown-menu mr-3" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#" @click="changePass()">Đổi mật khẩu</a>
+              <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#" @click="logout()">Đăng xuất</a>
             </div>
           </li>
@@ -47,6 +49,9 @@ export default {
     logout() {
       this.UserLogout();
       this.RouterTo('login');
+    },
+    changePass() {
+      this.RouterTo('changePass');
     },
   },
 };
