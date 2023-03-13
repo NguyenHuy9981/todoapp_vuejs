@@ -24,7 +24,7 @@ export default {
     return api.post(`${router}/forgotPassRequest`, data);
   },
   async checkTokenRequest(data) {
-    return api.post(`${router}/forgotPassRequest`, data);
+    return api.post(`${router}/checkTokenForgot`, data);
   },
   async forgotPassVerify(data) {
     return api.post(`${router}/forgotPassRequest`, data);
