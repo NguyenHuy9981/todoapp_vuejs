@@ -5,9 +5,11 @@ import HomeView from '../views/Home.vue';
 import RegisterView from '../views/Register.vue';
 import LoginView from '../views/Login.vue';
 import MeView from '../views/Me.vue';
+import AdminView from '../views/Admin.vue';
 import ChangePass from '../views/ChangePass.vue';
 import TodoIndex from '../views/Todo/Index.vue';
 import TodoDetail from '../views/Todo/Detail.vue';
+import ForgotPass from '../views/ForgotPass/ForgotPassReqquest.vue';
 
 import Error404 from '../views/Error404.vue';
 
@@ -35,9 +37,19 @@ const routes = [
     component: MeView,
   },
   {
+    path: '/admin',
+    name: 'Admin',
+    component: AdminView,
+  },
+  {
     path: '/changePass',
     name: 'ChangePass',
     component: ChangePass,
+  },
+  {
+    path: '/forgotPass',
+    name: 'ForgotPass',
+    component: ForgotPass,
   },
   {
     path: '/todo',

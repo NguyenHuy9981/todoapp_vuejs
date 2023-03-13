@@ -64,11 +64,6 @@
             </div>
           </b-modal>
         </div>
-
-        <a
-          href=""
-          class="pass-forgot"
-        >Forgot your password?</a>
       </form>
     </div>
   </div>

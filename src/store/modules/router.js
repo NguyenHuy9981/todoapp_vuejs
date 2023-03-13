@@ -9,6 +9,7 @@ export default {
     todoId: '/todo',
     me: '/me',
     changePass: '/changePass',
+    forgotPass: '/forgotPass',
     notFound: '/error/404',
   },
   getters: {

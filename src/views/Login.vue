@@ -38,6 +38,7 @@
         <a
           href=""
           class="pass-forgot"
+          @click="RouterTo('forgotPass')"
         >Forgot your password?</a>
       </form>
     </div>
@@ -68,6 +69,7 @@ export default {
         console.log('Lỗi');
       }
     },
+
   },
 };
 </script>
