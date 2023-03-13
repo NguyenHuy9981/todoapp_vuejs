@@ -1,4 +1,5 @@
 import router from '../../router';
+import { staticBase } from '../../config/app';
 
 export default {
   state: {
@@ -7,6 +8,7 @@ export default {
     todo: '/todo',
     todoId: '/todo',
     me: '/me',
+    changePass: '/changePass',
     notFound: '/error/404',
   },
   getters: {
@@ -15,6 +17,9 @@ export default {
     },
     getRouterId(state) {
       return (name, id) => `${state[name]}/${id}`;
+    },
+    getFilePath() {
+      return (file) => `${staticBase}/${file}`;
     },
   },
   actions: {

@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { storageToken } from '../storage';
+import { apiBase } from '../config/app';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: apiBase,
 });
 
 api.interceptors.request.use((config) => {
