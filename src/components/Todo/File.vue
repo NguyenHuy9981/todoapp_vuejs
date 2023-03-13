@@ -34,13 +34,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['TodoListFile', 'TodoUploadFile', 'TodoGetId', 'TodoAddFile']),
+    ...mapActions(['TodoUploadFile', 'TodoGetId', 'TodoAddFile']),
     async getJob() {
       const result = await this.TodoGetId(this.todoId);
       this.listFile = result.data.fileRef;
-    },
-    getFile() {
-      this.TodoListFile(this.todoId);
     },
     async onUploadFile() {
       const formData = new FormData();

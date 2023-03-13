@@ -49,8 +49,6 @@ export default {
   methods: {
     ...mapActions(['TodoListComment', 'TodoCreateComment', 'TodoDeleteComment']),
     getComment() {
-      console.log(this.todoId);
-
       this.TodoListComment(this.todoId);
     },
     postComment() {

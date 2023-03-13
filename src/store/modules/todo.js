@@ -170,13 +170,5 @@ export default {
       const result = await api.addFile(id, fileRef);
       return result;
     },
-    async TodoListFile({ commit }, jobId) {
-      const result = await api.listComment(jobId);
-      if (result.success) {
-        commit('SET_FILE', result.data);
-      }
-
-      return result.data;
-    },
   },
 };
