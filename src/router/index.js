@@ -9,7 +9,8 @@ import AdminView from '../views/Admin.vue';
 import ChangePass from '../views/ChangePass.vue';
 import TodoIndex from '../views/Todo/Index.vue';
 import TodoDetail from '../views/Todo/Detail.vue';
-import ForgotPass from '../views/ForgotPass/ForgotPassReqquest.vue';
+import ForgotPass from '../views/ForgotPass/Request.vue';
+import VerifyPass from '../views/ForgotPass/Verify.vue';
 
 import Error404 from '../views/Error404.vue';
 
@@ -50,6 +51,11 @@ const routes = [
     path: '/forgotPass',
     name: 'ForgotPass',
     component: ForgotPass,
+  },
+  {
+    path: '/verifyPass',
+    name: 'VerifyPass',
+    component: VerifyPass,
   },
   {
     path: '/todo',

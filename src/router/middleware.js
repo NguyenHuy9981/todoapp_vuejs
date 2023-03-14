@@ -3,7 +3,7 @@ import router from './index';
 
 let isInited = false;
 
-const authList = ['/login', '/register', '/forgotPass'];
+const authList = ['/login', '/register', '/forgotPass', '/verifyPass'];
 const publicList = [...authList, '/'];
 const adminList = ['/admin'];
 
