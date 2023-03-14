@@ -1,5 +1,6 @@
+import queryString from 'query-string';
 import router from '../../router';
-import { staticBase } from '../../config/app';
+import { rootUrl, staticBase } from '../../config/app';
 
 export default {
   state: {
@@ -21,6 +22,9 @@ export default {
     },
     getPathUrl() {
       return (file) => `${staticBase}/${file}`;
+    },
+    getQueryUrl() {
+      return (name, qs = {}) => `${rootUrl}/${name}?${queryString.stringify(qs)}`;
     },
   },
   actions: {
