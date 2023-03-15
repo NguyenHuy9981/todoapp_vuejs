@@ -37,6 +37,7 @@
         <tr
           v-for="(job, index) in listJobShow"
           :key="job._id"
+          :class="job.rowStyle"
         >
           <td>
             {{ index +1 }}
@@ -51,16 +52,20 @@
               <b-form-select
                 v-model="job.status"
                 :options="getTodoStatus"
+                :disabled="job.isDone"
                 @change="changeStatus( job._id,job.status)"
               />
             </div>
           </td>
-          {{ job.createdAt }}
+          <td>
+            {{ job.createdAt }}
+          </td>
           <td>
             {{ job.doneDay }}
           </td>
           <td>
             <a
+              v-if="!job.isDone"
               class="text-center"
               @click="TodoDelete(job._id)"
             >
@@ -110,6 +115,7 @@ export default {
         },
 
       ],
+      color: '',
     };
   },
   methods: {
@@ -132,11 +138,15 @@ export default {
   },
   computed: {
     listJobShow() {
-      return this.getTodoList.map((job) => ({
-        ...job,
-        createdAt: moment(job.createdAt).format('MMMM Do YYYY, h:mm:ss a'),
-        doneDay: moment(job.doneDay).format('MMMM Do YYYY, h:mm:ss a'),
-      }));
+      return this.getTodoList.map((job) => {
+        return {
+          ...job,
+          createdAt: moment(job.createdAt).format('MMMM Do YYYY, h:mm:ss a'),
+          doneDay: (job.doneDay) ? moment(job.doneDay).format('MMMM Do YYYY, h:mm:ss a') : '',
+          rowStyle: (job.doneDay) ? 'text-success' : '',
+          isDone: !!(job.doneDay),
+        };
+      });
     },
   },
 
