@@ -13,6 +13,7 @@
     "bootstrap": "^5.2.3",
     "bootstrap-vue": "^2.23.1",
     "core-js": "^3.8.3",
+    "moment": "^2.29.4",
     "query-string": "^8.1.0",
     "vue": "^2.7.14",
     "vue-excel-xlsx": "^1.2.2",

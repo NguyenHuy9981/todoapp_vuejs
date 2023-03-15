@@ -1,5 +1,15 @@
 <template>
   <div>
+    <vue-excel-xlsx
+      class="mt-3"
+      :data="listJobShow"
+      :columns="columns"
+      file-name="todo"
+      file-type="xlsx"
+      sheet-name="Todo"
+    >
+      Xuất File Excel
+    </vue-excel-xlsx>
     <table class="table table-bordered mt-4">
       <thead>
         <tr>
@@ -25,7 +35,7 @@
       </thead>
       <tbody>
         <tr
-          v-for="(job, index) in getTodoList"
+          v-for="(job, index) in listJobShow"
           :key="job._id"
         >
           <td>
@@ -67,6 +77,7 @@
 import {
   mapActions,
 } from 'vuex';
+import moment from 'moment';
 
 export default {
   name: 'TodoList',
@@ -80,6 +91,25 @@ export default {
       isEditing: false,
       upHere: false,
       selected: null,
+      columns: [
+        {
+          label: 'Jobs',
+          field: 'name',
+        },
+        {
+          label: 'Status',
+          field: 'status',
+        },
+        {
+          label: 'Ngay tao',
+          field: 'createdAt',
+        },
+        {
+          label: 'Ngay hoan thanh',
+          field: 'doneDay',
+        },
+
+      ],
     };
   },
   methods: {
@@ -99,6 +129,15 @@ export default {
     } catch (error) {
       console.log('Loi');
     }
+  },
+  computed: {
+    listJobShow() {
+      return this.getTodoList.map((job) => ({
+        ...job,
+        createdAt: moment(job.createdAt).format('MMMM Do YYYY, h:mm:ss a'),
+        doneDay: moment(job.doneDay).format('MMMM Do YYYY, h:mm:ss a'),
+      }));
+    },
   },
 
 };
