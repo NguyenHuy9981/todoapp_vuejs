@@ -4,7 +4,7 @@ import VueExcelXlsx from 'vue-excel-xlsx';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import storeMixin from './store/mixin';
+import mixin from './mixin';
 import './router/middleware';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -14,9 +14,8 @@ import '@fortawesome/fontawesome-free/js/all.js';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
-Vue.mixin(storeMixin);
 Vue.use(VueExcelXlsx);
-
+Vue.use(mixin);
 Vue.config.productionTip = false;
 
 new Vue({

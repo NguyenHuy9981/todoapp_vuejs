@@ -12,17 +12,11 @@
     >
       Xuất File Excel
     </vue-excel-xlsx>
-    <div
-      class="right"
+    <slot name="top" />
+
+    <table
+      class="table table-bordered mt-4"
     >
-      <label>Sản phẩm hiển thị:</label>
-      <b-form-select
-        v-model="pagging.limit"
-        :options="getTodoLimit"
-        @change="loadTodo"
-      />
-    </div>
-    <table class="table table-bordered mt-4">
       <thead>
         <tr>
           <th scope="col">
@@ -45,6 +39,7 @@
           </th>
         </tr>
       </thead>
+      <slot name="mid" />
       <tbody>
         <tr
           v-for="(job, index) in listJobShow"
@@ -70,10 +65,10 @@
             </div>
           </td>
           <td>
-            {{ job.createdAt }}
+            {{ job.createdAt | formatDate }}
           </td>
           <td>
-            {{ job.doneDay }}
+            {{ job.doneDay | formatDate }}
           </td>
           <td>
             <a
@@ -84,25 +79,40 @@
               <span class="fa fa-trash" />
             </a>
           </td>
+          <slot
+            name="job"
+            :job="job"
+          />
         </tr>
       </tbody>
     </table>
+    <slot />
     <div>
-      <b-pagination
-        v-if="pagging.total"
-        v-model="pagging.page"
-        :total-rows="pagging.total"
-        :per-page="pagging.limit"
-        @input="loadTodo"
-      />
+      <div class="row">
+        <div class="col-lg-2">
+          <b-form-select
+            v-model="pagging.limit"
+            :options="getTodoLimit"
+            @change="loadTodo"
+          />
+        </div>
+        <div class="col-lg-10">
+          <b-pagination
+            v-if="pagging.total"
+            v-model="pagging.page"
+            :total-rows="pagging.total"
+            :per-page="pagging.limit"
+            @input="loadTodo"
+          />
+        </div>
+        <slot name="bot" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import {
-  mapActions,
-} from 'vuex';
+import { mapActions } from 'vuex';
 import moment from 'moment';
 
 export default {
@@ -141,7 +151,6 @@ export default {
         total: 0,
       },
       fileName: `todo-${moment().format('DD-MM-YYYY-hh-mm')}`,
-
     };
   },
   methods: {
@@ -159,19 +168,18 @@ export default {
       });
     },
   },
+
   async created() {
     this.loadTodo();
   },
+
   computed: {
     listJobShow() {
       return this.getTodoList.map((job) => {
         return {
           ...job,
-          createdAt: moment(job.createdAt).format('DD/MM/YYYY  hh:mm'),
-          doneDay: (job.doneDay) ? moment(job.doneDay).format('DD/MM/YYYY  hh:mm') : '',
           rowStyle: (job.doneDay) ? 'text-success' : '',
           isDone: !!(job.doneDay),
-
         };
       });
     },

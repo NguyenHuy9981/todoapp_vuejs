@@ -5,7 +5,20 @@
     </div>
     <create />
     <filter-bar />
-    <list />
+    <list>
+      <!-- <template #top>
+        Trên
+      </template>
+      <template #mid>
+        Giữa
+      </template>
+      <template #job="{job}">
+        {{ job._id }}
+      </template>
+      <template #bot>
+        Dưới
+      </template> -->
+    </list>
   </div>
 </template>
 
