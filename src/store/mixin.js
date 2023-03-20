@@ -18,6 +18,7 @@ export default {
     'getTodoList',
     'getTodoCount',
     'getTodoStatus',
+    'getTodoLimit',
     'getRouterPath',
     'getRouterId',
     'getPathUrl',

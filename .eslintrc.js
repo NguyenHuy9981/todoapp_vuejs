@@ -35,6 +35,8 @@ module.exports = {
     'import/extensions': 'off',
     'vue/multi-word-component-names': 'off',
     'vue/order-in-components': 'off',
+    'arrow-body-style': 'off',
+    'import/prefer-default-export': 'off',
     // 'import/order': 'off',
   },
 };

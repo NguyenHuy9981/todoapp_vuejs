@@ -3,9 +3,13 @@ import api from './base';
 const router = '/todo';
 
 export default {
-  async getList(opts = { }) {
+  async getList(query = { }, page = 0, limit = 10) {
     return api.get(router, {
-      params: opts,
+      params: {
+        ...query,
+        _page: page,
+        _limit: limit,
+      },
     });
   },
   async create(data) {

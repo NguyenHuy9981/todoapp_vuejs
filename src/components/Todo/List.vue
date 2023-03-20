@@ -1,15 +1,27 @@
 <template>
   <div>
     <vue-excel-xlsx
-      class="mt-3"
+      v-if="pagging.total"
+      class="mt-3 right"
+
       :data="listJobShow"
       :columns="columns"
-      file-name="todo"
+      :file-name="fileName"
       file-type="xlsx"
       sheet-name="Todo"
     >
       Xuất File Excel
     </vue-excel-xlsx>
+    <div
+      class="right"
+    >
+      <label>Sản phẩm hiển thị:</label>
+      <b-form-select
+        v-model="pagging.limit"
+        :options="getTodoLimit"
+        @change="loadTodo"
+      />
+    </div>
     <table class="table table-bordered mt-4">
       <thead>
         <tr>
@@ -75,6 +87,15 @@
         </tr>
       </tbody>
     </table>
+    <div>
+      <b-pagination
+        v-if="pagging.total"
+        v-model="pagging.page"
+        :total-rows="pagging.total"
+        :per-page="pagging.limit"
+        @input="loadTodo"
+      />
+    </div>
   </div>
 </template>
 
@@ -113,13 +134,22 @@ export default {
           label: 'Ngay hoan thanh',
           field: 'doneDay',
         },
-
       ],
-      color: '',
+      pagging: {
+        page: 1,
+        limit: 5,
+        total: 0,
+      },
+      fileName: `todo-${moment().format('DD-MM-YYYY-hh-mm')}`,
+
     };
   },
   methods: {
     ...mapActions(['TodoGetList', 'TodoUpdate', 'TodoDelete']),
+    async loadTodo() {
+      const result = await this.TodoGetList(this.pagging);
+      this.pagging.total = result.total;
+    },
     async changeStatus(id, status) {
       await this.TodoUpdate({
         id,
@@ -130,24 +160,22 @@ export default {
     },
   },
   async created() {
-    try {
-      await this.TodoGetList();
-    } catch (error) {
-      console.log('Loi');
-    }
+    this.loadTodo();
   },
   computed: {
     listJobShow() {
       return this.getTodoList.map((job) => {
         return {
           ...job,
-          createdAt: moment(job.createdAt).format('MMMM Do YYYY, h:mm:ss a'),
-          doneDay: (job.doneDay) ? moment(job.doneDay).format('MMMM Do YYYY, h:mm:ss a') : '',
+          createdAt: moment(job.createdAt).format('DD/MM/YYYY  hh:mm'),
+          doneDay: (job.doneDay) ? moment(job.doneDay).format('DD/MM/YYYY  hh:mm') : '',
           rowStyle: (job.doneDay) ? 'text-success' : '',
           isDone: !!(job.doneDay),
+
         };
       });
     },
+
   },
 
 };
@@ -159,5 +187,9 @@ export default {
 a:hover {
     color: red;
     cursor: pointer;
+}
+.right{
+  float:right;
+  width:100px;
 }
 </style>

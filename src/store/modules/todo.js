@@ -23,7 +23,14 @@ export default {
           text: 'done',
         },
       ],
+      limit: [5, 10, 50, 100].map((value) => {
+        return {
+          value,
+          text: value,
+        };
+      }),
     },
+
     listFile: [],
   },
   getters: {
@@ -35,6 +42,9 @@ export default {
     },
     getTodoStatus(state) {
       return state.option.status;
+    },
+    getTodoLimit(state) {
+      return state.option.limit;
     },
     getTodoDetail(state) {
       return state.job;
@@ -54,12 +64,10 @@ export default {
       state.list.unshift(newJob);
     },
     UPDATE_JOB(state, { id, update }) {
-      const job = state.list.find((item) => item._id === id);
+      let job = state.list.find((item) => item._id === id);
+
       if (job) {
-        Object.entries(update).forEach((entry) => {
-          const [key, value] = entry;
-          job[key] = value;
-        });
+        job = Object.assign(job, update);
       }
     },
     SET_FILTER(state, filter) {
@@ -85,8 +93,8 @@ export default {
     },
   },
   actions: {
-    async TodoGetList({ commit, state }) {
-      const result = await api.getList(state.filter);
+    async TodoGetList({ commit, state }, { page, limit }) {
+      const result = await api.getList(state.filter, page, limit);
 
       if (result.success) {
         commit('SET_LIST', result.data);
