@@ -12,6 +12,12 @@
     >
       Xuất File Excel
     </vue-excel-xlsx>
+    <b-button
+      variant="success mt-3"
+      @click="showDataEmit"
+    >
+      Test Event($emit)
+    </b-button>
     <slot name="top" />
 
     <table
@@ -159,6 +165,7 @@ export default {
       const result = await this.TodoGetList(this.pagging);
       this.pagging.total = result.total;
     },
+
     async changeStatus(id, status) {
       await this.TodoUpdate({
         id,
@@ -167,12 +174,15 @@ export default {
         },
       });
     },
-  },
 
+    showDataEmit() {
+      const jobEmit = this.getTodoList.map((job) => job.name);
+      this.$emit('showJobEmit', jobEmit);
+    },
+  },
   async created() {
     this.loadTodo();
   },
-
   computed: {
     listJobShow() {
       return this.getTodoList.map((job) => {

@@ -5,7 +5,10 @@
     </div>
     <create />
     <filter-bar />
-    <list>
+    <list
+      ref="TodoList"
+      @showJobEmit="getData($event)"
+    >
       <!-- <template #top>
         Trên
       </template>
@@ -18,6 +21,7 @@
       <template #bot>
         Dưới
       </template> -->
+      <p>Emit: {{ emit }}</p>
     </list>
   </div>
 </template>
@@ -30,11 +34,23 @@ import Filter from '../../components/Todo/Filter.vue';
 
 export default {
   name: 'TodoIndex',
+  data() {
+    return {
+      emit: '',
+    };
+  },
   components: {
     'create': Create,
     'list': List,
     'filter-bar': Filter,
   },
-
+  mounted() {
+    // this.$refs.TodoList.loadTodo() // Copoment Parent call methods in Child Component
+  },
+  methods: {
+    getData(data) {
+      this.emit = data;
+    },
+  },
 };
 </script>
