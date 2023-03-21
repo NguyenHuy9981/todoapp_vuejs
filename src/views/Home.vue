@@ -4,7 +4,7 @@
       alt="Vue logo"
       src="../assets/logo.png"
     >
-    <h1>Chào mừng đến với ToDo App</h1>
+    <h1>{{ $t("WELCOME") }}</h1>
   </div>
 </template>
 

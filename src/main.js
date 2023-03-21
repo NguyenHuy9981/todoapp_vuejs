@@ -5,6 +5,8 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import mixin from './mixin';
+import i18n from './languages/i18n';
+
 import './router/middleware';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -21,5 +23,6 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
+  i18n,
   render: (h) => h(App),
 }).$mount('#app');

@@ -6,7 +6,7 @@
       style="float:right"
       @click="show =true"
     >
-      Tao moi
+      {{ $t("ADD") }}
     </b-button>
     <b-modal
       v-model="show"
@@ -30,7 +30,7 @@
             :options="getTodoStatus"
           >
             <b-form-select-option :value="''">
-              Chọn trạng thái
+              {{ $t("SELECT_STATUS") }}
             </b-form-select-option>
           </b-form-select>
         </b-form-group>

@@ -6,7 +6,7 @@
         @submit.prevent="register()"
       >
         <div class="title">
-          ĐĂNG KÍ
+          {{ $t("REGISTER") }}
         </div>
 
         <div class="input">
@@ -50,7 +50,7 @@
             title="Using Component Methods"
           >
             <div class="d-block text-center">
-              <h3>Tạo tài khoản thành công</h3>
+              <h3>{{ $t("ACCOUNT_SUCCESSFULLY_CREATED") }}</h3>
             </div>
             <div class="alert">
               <b-button
@@ -59,7 +59,7 @@
                 block
                 @click="toggleModal"
               >
-                Đăng nhập
+                {{ $t("LOGIN") }}
               </b-button>
             </div>
           </b-modal>

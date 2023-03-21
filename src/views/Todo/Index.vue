@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h1>To Do List ({{ getTodoCount }})</h1>
+      <h1>{{ $t("TODO_LIST") }} ({{ getTodoCount }})</h1>
     </div>
     <create />
     <filter-bar />

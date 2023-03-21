@@ -1,0 +1,15 @@
+{
+    "TODO_LIST" : "Danh sách việc cần làm",
+    "CHANGE_PASSWORD" : "ĐỔI MẬT KHẨU",
+    "WELCOME" : "Chào mừng đến với ToDo App",
+    "LOGIN" : "Đăng nhập",
+    "REGISTER" : "Đăng kí",
+    "FORGOT_YOUR_PASSWORD" : "Quên mật khẩu",
+    "GO" : "GO",
+    "USER_INFO" : "Thông tin cá nhân",
+    "NAME" : "Tên",
+    "EMAIL" : "Email",
+    "ACCOUNT_SUCCESSFULLY_CREATED" : "Tạo tài khoản thành công",
+    "ADD" : "Tạo mới",
+    "SELECT_STATUS" : "Chọn trạng thái"
+}

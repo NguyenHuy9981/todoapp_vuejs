@@ -6,7 +6,7 @@
         @submit.prevent="login()"
       >
         <div class="title">
-          ĐĂNG NHẬP
+          {{ $t("LOGIN") }}
         </div>
 
         <div class="input">
@@ -31,7 +31,7 @@
 
         <div class="button login">
           <button type="submit">
-            <span>GO</span> <i class="fa fa-check" />
+            <span>{{ $t("GO") }}</span> <i class="fa fa-check" />
           </button>
         </div>
 
@@ -39,7 +39,7 @@
           href=""
           class="pass-forgot"
           @click="RouterTo('forgotPass')"
-        >Forgot your password?</a>
+        >{{ $t("FORGOT_YOUR_PASSWORD") }}</a>
       </form>
     </div>
   </div>

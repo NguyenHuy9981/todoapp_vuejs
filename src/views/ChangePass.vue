@@ -6,7 +6,7 @@
         @submit.prevent="changePass()"
       >
         <div class="title">
-          ĐỔI MẬT KHẨU
+          {{ $t("CHANGE_PASSWORD") }}
         </div>
 
         <div class="input">
