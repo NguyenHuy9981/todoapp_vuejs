@@ -13,33 +13,34 @@ import ForgotPass from '../views/ForgotPass/Request.vue';
 import VerifyPass from '../views/ForgotPass/Verify.vue';
 
 import Error404 from '../views/Error404.vue';
+import i18n from '../plugins/i18n';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: i18n.t('HOME'),
     component: HomeView,
   },
   {
     path: '/login',
-    name: 'Login',
+    name: i18n.t('LOGIN'),
     component: LoginView,
   },
   {
     path: '/register',
-    name: 'Register',
+    name: i18n.t('REGISTER'),
     component: RegisterView,
   },
   {
     path: '/me',
-    name: 'Me',
+    name: i18n.t('PROFILE'),
     component: MeView,
   },
   {
     path: '/admin',
-    name: 'Admin',
+    name: i18n.t('ADMIN'),
     component: AdminView,
   },
   {

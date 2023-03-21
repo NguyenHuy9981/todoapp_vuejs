@@ -12,5 +12,6 @@
     "ACCOUNT_SUCCESSFULLY_CREATED" : "Tạo tài khoản thành công",
     "ADD" : "Tạo mới",
     "SELECT_STATUS" : "Chọn trạng thái",
+    "HOME" : "Trang chu",
     "HELLO_USER" : "Xin chào {name} nhé"
 }

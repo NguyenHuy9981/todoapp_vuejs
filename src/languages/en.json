@@ -11,6 +11,7 @@
     "EMAIL" : "EMAIL",
     "ACCOUNT_SUCCESSFULLY_CREATED" : "ACCOUNT SUCCESSFULLY CREATED",
     "ADD" : "ADD",
+    "HOME" : "Home",
     "SELECT_STATUS" : "SELECT STATUS",
     "HELLO_USER" : "Hello {name} !"
 }
