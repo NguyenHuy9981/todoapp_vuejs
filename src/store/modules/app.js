@@ -1,5 +1,5 @@
-import language from '../../languages/i18n';
-import { storageI18n } from '../../storage';
+import language from '../../plugins/i18n';
+import { storageI18n } from '../../plugins/storage';
 
 export default {
   state: {

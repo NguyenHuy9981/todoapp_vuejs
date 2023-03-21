@@ -5,7 +5,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import mixin from './mixin';
-import i18n from './languages/i18n';
+import i18n from './plugins/i18n';
 
 import './router/middleware';
 

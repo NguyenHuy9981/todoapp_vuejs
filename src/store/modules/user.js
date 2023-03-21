@@ -1,4 +1,4 @@
-import { storageUserId, storageToken } from '../../storage';
+import { storageUserId, storageToken } from '../../plugins/storage';
 import apiAuth from '../../api/auth';
 import apiUser from '../../api/user';
 

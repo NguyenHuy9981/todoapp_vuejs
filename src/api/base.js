@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { storageToken } from '../storage';
+import { storageToken } from '../plugins/storage';
 import { apiBase } from '../config/app';
 
 const api = axios.create({
