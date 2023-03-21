@@ -8,7 +8,8 @@ const publicList = [...authList, '/'];
 const adminList = ['/admin'];
 
 router.beforeEach(async (to, from, next) => {
-  const { path } = to;
+  const { path, name } = to;
+  document.title = name;
 
   if (store.getters.getUserAuthed && !isInited) {
     await store.dispatch('UserInfo');
