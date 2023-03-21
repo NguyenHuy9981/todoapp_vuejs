@@ -1,3 +1,16 @@
 {
-    "todolist": "To-Do List"
+    "TODO_LIST" : "TODO LIST",
+    "CHANGE_PASSWORD" : "CHANGE PASSWORD",
+    "WELCOME" : "WELCOME",
+    "LOGIN" : "LOGIN",
+    "REGISTER" : "REGISTER",
+    "FORGOT_YOUR_PASSWORD" : "FORGOT YOUR PASSWORD",
+    "GO" : "GO",
+    "USER_INFO" : "USER INFO",
+    "NAME" : "NAME",
+    "EMAIL" : "EMAIL",
+    "ACCOUNT_SUCCESSFULLY_CREATED" : "ACCOUNT SUCCESSFULLY CREATED",
+    "ADD" : "ADD",
+    "SELECT_STATUS" : "SELECT STATUS",
+    "HELLO_USER" : "Hello {name} !"
 }

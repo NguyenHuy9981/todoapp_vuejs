@@ -11,5 +11,6 @@
     "EMAIL" : "Email",
     "ACCOUNT_SUCCESSFULLY_CREATED" : "Tạo tài khoản thành công",
     "ADD" : "Tạo mới",
-    "SELECT_STATUS" : "Chọn trạng thái"
+    "SELECT_STATUS" : "Chọn trạng thái",
+    "HELLO_USER" : "Xin chào {name} nhé"
 }

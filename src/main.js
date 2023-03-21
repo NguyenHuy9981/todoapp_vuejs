@@ -20,9 +20,11 @@ Vue.use(VueExcelXlsx);
 Vue.use(mixin);
 Vue.config.productionTip = false;
 
-new Vue({
+const app = new Vue({
   router,
   store,
   i18n,
   render: (h) => h(App),
 }).$mount('#app');
+
+export default app;

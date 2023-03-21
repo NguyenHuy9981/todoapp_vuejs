@@ -12,6 +12,25 @@
         class="collapse navbar-collapse"
       >
         <ul class="navbar-nav ml-auto right">
+          <div>
+            <b-dropdown
+              id="dropdown-1"
+              text="Languages"
+              class="m-md-2"
+            >
+              <b-dropdown-item
+                @click="changeLang('en')"
+              >
+                Tiếng Anh
+              </b-dropdown-item>
+              <b-dropdown-item
+                @click="changeLang('vn')"
+              >
+                Tiếng Việt
+              </b-dropdown-item>
+            </b-dropdown>
+          </div>
+
           <li
             v-if="!getUserAuthed"
             class="nav-item ml-3 mr-3 distance"
@@ -40,7 +59,7 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              {{ getUserName }}
+              {{ $t("HELLO_USER", { name: getUserName }) }}
             </a>
             <div
               class="dropdown-menu mr-3"
@@ -66,6 +85,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 
 export default {
   name: 'HeaderAuth',
@@ -75,6 +95,10 @@ export default {
     };
   },
   methods: {
+    ...mapActions(['setLang']),
+    async changeLang(value) {
+      await this.setLang(value);
+    },
     logout() {
       this.UserLogout();
       this.RouterTo('login');
