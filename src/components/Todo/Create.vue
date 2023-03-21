@@ -64,5 +64,11 @@ export default {
       }
     },
   },
+  watch: {
+    'form.name': function (oldValue) {
+      console.log(oldValue);
+    },
+  },
+
 };
 </script>
