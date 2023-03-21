@@ -1,11 +1,11 @@
 import todo from './todo';
 import user from './user';
 import router from './router';
-import language from './languages';
+import app from './app';
 
 export default {
   todo,
   user,
   router,
-  language,
+  app,
 };

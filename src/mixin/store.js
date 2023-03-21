@@ -25,5 +25,6 @@ export default {
     'getQueryUrl',
     'getUserRole',
     'getIsAdmin',
+    'getI18n',
   ]),
 };
