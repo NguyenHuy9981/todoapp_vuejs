@@ -35,12 +35,12 @@ const routes = [
   },
   {
     path: '/me',
-    name: i18n.t('PROFILE'),
+    name: 'me',
     component: MeView,
   },
   {
     path: '/admin',
-    name: i18n.t('ADMIN'),
+    name: 'admin',
     component: AdminView,
   },
   {
@@ -75,7 +75,7 @@ const routes = [
   },
   {
     path: '*',
-    name: 'Error Page',
+    name: 'NotFound 404',
     component: Error404,
   },
 ];

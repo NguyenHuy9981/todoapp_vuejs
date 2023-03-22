@@ -3,10 +3,17 @@
     <el-menu
       :default-active="activeMenu"
       mode="horizontal"
+      @select="onChangeMenu"
     >
-      <el-menu-item index="todo">
-        To Do App
+      <el-menu-item
+        v-for="item in listMenu"
+        v-if="item.show"
+        :key="item.key"
+        :index="item.key"
+      >
+        <span>{{ item.label }}</span>
       </el-menu-item>
+
       <el-submenu
         v-if="getUserAuthed"
         index="user"
@@ -21,22 +28,6 @@
           Đăng xuất
         </el-menu-item>
       </el-submenu>
-      <el-menu-item
-        v-if="!getUserAuthed"
-        index="register"
-      >
-        <router-link :to="getRouterPath('register')">
-          Đăng kí
-        </router-link>
-      </el-menu-item>
-      <el-menu-item
-        v-if="!getUserAuthed"
-        index="login"
-      >
-        <router-link :to="getRouterPath('login')">
-          Đăng nhập
-        </router-link>
-      </el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -62,6 +53,37 @@ export default {
     },
     changePass() {
       this.RouterTo('changePass');
+    },
+    onChangeMenu(key) {
+      const menu = this.listMenu.find((item) => item.key === key);
+      if (menu.to) {
+        this.RouterTo(menu.to);
+      }
+    },
+  },
+  computed: {
+    listMenu() {
+      return [{
+        label: 'TodoApp',
+        key: 'todo',
+        show: true,
+        to: 'todo',
+      }, {
+        label: 'Tai khoan',
+        key: 'user',
+        show: this.getUserAuthed,
+        to: '',
+      }, {
+        label: 'Dang nhap',
+        key: 'login',
+        show: !this.getUserAuthed,
+        to: 'login',
+      }, {
+        label: 'Dang ki',
+        key: 'register',
+        show: !this.getUserAuthed,
+        to: 'register',
+      }];
     },
   },
 };
