@@ -1,14 +1,9 @@
 <template>
   <el-form
-    ref="form"
     :model="form"
-    label-width="120px"
   >
     <el-row>
-      <el-col
-        :span="12"
-        :offset="5"
-      >
+      <el-col>
         <el-form-item
           label="Email"
         >

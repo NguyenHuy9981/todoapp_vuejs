@@ -2,13 +2,9 @@
   <el-form
     ref="form"
     :model="form"
-    label-width="120px"
   >
     <el-row>
-      <el-col
-        :span="12"
-        :offset="5"
-      >
+      <el-col>
         <el-form-item
           label="Name"
         >
@@ -26,6 +22,7 @@
         </el-form-item>
         <el-form-item>
           <el-button
+            type="primary"
             @click="register()"
           >
             Đăng kí
