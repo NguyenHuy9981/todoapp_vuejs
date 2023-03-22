@@ -39,6 +39,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     // 'import/order': 'off',
     'no-empty': 'off',
+    'vue/no-use-v-if-with-v-for': 'off',
     'vue/no-deprecated-filter': 'off',
   },
 };

@@ -15,7 +15,7 @@ export default {
   },
   getters: {
     getRouterPath(state) {
-      return (name) => state[name];
+      return (name) => state[name] || '/';
     },
     getRouterId(state) {
       return (name, id) => `${state[name]}/${id}`;

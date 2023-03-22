@@ -1,86 +1,34 @@
 <template>
   <div class="header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <span
-        v-if="getUserAuthed"
-        class="ml-5"
+    <el-menu
+      :default-active="activeMenu"
+      mode="horizontal"
+      @select="onChangeMenu"
+    >
+      <el-menu-item
+        v-for="item in listMenu"
+        v-if="item.show"
+        :key="item.key"
+        :index="item.key"
       >
-        <router-link :to="getRouterPath('todo')">Todo App</router-link>
-      </span>
-      <div
-        id="navbarSupportedContent"
-        class="collapse navbar-collapse"
-      >
-        <ul class="navbar-nav ml-auto right">
-          <div>
-            <b-dropdown
-              id="dropdown-1"
-              text="Languages"
-              class="m-md-2"
-            >
-              <b-dropdown-item
-                @click="changeLang('en')"
-              >
-                Tiếng Anh
-              </b-dropdown-item>
-              <b-dropdown-item
-                @click="changeLang('vn')"
-              >
-                Tiếng Việt
-              </b-dropdown-item>
-            </b-dropdown>
-          </div>
+        <span>{{ item.label }}</span>
+      </el-menu-item>
 
-          <li
-            v-if="!getUserAuthed"
-            class="nav-item ml-3 mr-3 distance"
-          >
-            <router-link :to="getRouterPath('login')">
-              Đăng nhập
-            </router-link>
-          </li>
-          <li
-            v-if="!getUserAuthed"
-            class="nav-item ml-3 mr-3 distance"
-          >
-            <router-link :to="getRouterPath('register')">
-              Đăng kí
-            </router-link>
-          </li>
-          <li
-            v-show="getUserAuthed"
-            class="nav-item dropdown"
-          >
-            <a
-              class="nav-link dropdown-toggle"
-              href=""
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              {{ $t("HELLO_USER", { name: getUserName }) }}
-            </a>
-            <div
-              class="dropdown-menu mr-3"
-              aria-labelledby="navbarDropdown"
-            >
-              <a
-                class="dropdown-item"
-                href="#"
-                @click="changePass()"
-              >Đổi mật khẩu</a>
-              <div class="dropdown-divider" />
-              <a
-                class="dropdown-item"
-                href="#"
-                @click="logout()"
-              >Đăng xuất</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
+      <el-submenu
+        v-if="getUserAuthed"
+        index="user"
+      >
+        <template #title>
+          Xin chào
+        </template>
+        <el-menu-item>
+          Đổi mật khẩu
+        </el-menu-item>
+        <el-menu-item @click=" logout()">
+          Đăng xuất
+        </el-menu-item>
+      </el-submenu>
+    </el-menu>
   </div>
 </template>
 
@@ -88,10 +36,10 @@
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'HeaderAuth',
+  name: 'NavMenu',
   data() {
     return {
-      user: {},
+      activeMenu: 'todo',
     };
   },
   methods: {
@@ -106,11 +54,41 @@ export default {
     changePass() {
       this.RouterTo('changePass');
     },
+    onChangeMenu(key) {
+      const menu = this.listMenu.find((item) => item.key === key);
+      if (menu.to) {
+        this.RouterTo(menu.to);
+      }
+    },
+  },
+  computed: {
+    listMenu() {
+      return [{
+        label: 'TodoApp',
+        key: 'todo',
+        show: true,
+        to: 'todo',
+      }, {
+        label: 'Tai khoan',
+        key: 'user',
+        show: this.getUserAuthed,
+        to: '',
+      }, {
+        label: 'Dang nhap',
+        key: 'login',
+        show: !this.getUserAuthed,
+        to: 'login',
+      }, {
+        label: 'Dang ki',
+        key: 'register',
+        show: !this.getUserAuthed,
+        to: 'register',
+      }];
+    },
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .right {
   margin-left: 1190px;
