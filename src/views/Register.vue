@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <div>
       <form
@@ -12,7 +12,7 @@
         <div class="input">
           <input
             id="name"
-            v-model="user.name"
+            v-model="form.name"
             type="text"
             name="name"
             placeholder="Tên"
@@ -22,7 +22,7 @@
         <div class="input">
           <input
             id="email"
-            v-model="user.email"
+            v-model="form.email"
             type="email"
             name="email"
             placeholder="Email"
@@ -31,8 +31,7 @@
 
         <div class="input">
           <input
-            id="pass"
-            v-model="user.password"
+            v-model="form.password"
             type="password"
             name="password"
             placeholder="Password"
@@ -41,7 +40,10 @@
         </div>
 
         <div class="button login">
-          <b-button type="submit">
+          <b-button
+            type="submit"
+            @click="register()"
+          >
             <span>GO</span> <i class="fa fa-check" />
           </b-button>
           <b-modal
@@ -49,9 +51,6 @@
             hide-footer
             title="Using Component Methods"
           >
-            <div class="d-block text-center">
-              <h3>{{ $t("ACCOUNT_SUCCESSFULLY_CREATED") }}</h3>
-            </div>
             <div class="alert">
               <b-button
                 class="mt-2 "
@@ -67,6 +66,44 @@
       </form>
     </div>
   </div>
+</template> -->
+
+<template>
+  <el-form
+    ref="form"
+    :model="form"
+    label-width="120px"
+  >
+    <el-row>
+      <el-col
+        :span="12"
+        :offset="5"
+      >
+        <el-form-item
+          label="Name"
+        >
+          <el-input v-model="form.name" />
+        </el-form-item>
+        <el-form-item
+          label="Email"
+        >
+          <el-input v-model="form.email" />
+        </el-form-item>
+        <el-form-item
+          label="Password"
+        >
+          <el-input v-model="form.password" />
+        </el-form-item>
+        <el-form-item>
+          <el-button
+            @click="register()"
+          >
+            Đăng kí
+          </el-button>
+        </el-form-item>
+      </el-col>
+    </el-row>
+  </el-form>
 </template>
 
 <script>
@@ -76,7 +113,7 @@ export default {
   name: 'RegisterIndex',
   data() {
     return {
-      user: {
+      form: {
         name: '',
         email: '',
         password: '',
@@ -85,20 +122,18 @@ export default {
   },
 
   methods: {
-    showModal() {
-      this.$refs['my-modal'].show();
-    },
-    toggleModal() {
-      this.RouterTo('login');
-    },
-
     ...mapActions(['UserRegister']),
     async register() {
       try {
-        await this.UserRegister(this.user);
-        this.showModal();
+        await this.UserRegister(this.form);
+
+        this.$message({
+          message: this.$t('REGISTER_SUCCESS'),
+          type: 'success',
+        });
+        this.RouterTo('login');
       } catch (error) {
-        console.log('Loi');
+
       }
     },
   },
