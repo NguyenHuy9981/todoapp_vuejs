@@ -1,48 +1,33 @@
 <template>
-  <div class="login">
-    <div class="materialContainer">
-      <form
-        class="box"
-        @submit.prevent="login()"
+  <el-form
+    ref="form"
+    :model="form"
+    label-width="120px"
+  >
+    <el-row>
+      <el-col
+        :span="12"
+        :offset="5"
       >
-        <div class="title">
-          {{ $t("LOGIN") }}
-        </div>
-
-        <div class="input">
-          <input
-            id="email"
-            v-model="form.email"
-            type="text"
-            name="email"
-            placeholder="Email"
+        <el-form-item
+          label="Email"
+        >
+          <el-input v-model="form.email" />
+        </el-form-item>
+        <el-form-item label="Password">
+          <el-input v-model="form.password" />
+        </el-form-item>
+        <el-form-item>
+          <el-button
+            type="primary"
+            @click="login()"
           >
-        </div>
-
-        <div class="input">
-          <input
-            id="pass"
-            v-model="form.password"
-            type="password"
-            name="pass"
-            placeholder="Password"
-          >
-        </div>
-
-        <div class="button login">
-          <button type="submit">
-            <span>{{ $t("GO") }}</span> <i class="fa fa-check" />
-          </button>
-        </div>
-
-        <a
-          href=""
-          class="pass-forgot"
-          @click="RouterTo('forgotPass')"
-        >{{ $t("FORGOT_YOUR_PASSWORD") }}</a>
-      </form>
-    </div>
-  </div>
+            Đăng nhập
+          </el-button>
+        </el-form-item>
+      </el-col>
+    </el-row>
+  </el-form>
 </template>
 
 <script>
@@ -73,7 +58,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-  @import '@/styles/login.scss';
-</style>
