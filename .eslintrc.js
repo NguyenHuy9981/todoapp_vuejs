@@ -38,6 +38,7 @@ module.exports = {
     'arrow-body-style': 'off',
     'import/prefer-default-export': 'off',
     // 'import/order': 'off',
+    'no-empty': 'off',
     'vue/no-deprecated-filter': 'off',
   },
 };

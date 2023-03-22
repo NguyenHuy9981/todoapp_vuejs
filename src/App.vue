@@ -4,21 +4,18 @@
       <nav-bar />
     </div>
     <div>
-      <div class="row">
-        <div
-          class="col-lg-6"
-          style="margin:auto"
+      <el-row>
+        <el-col
+          :span="12"
+          :offset="6"
         >
           <div class=" mt-4">
-            <div
-              class="card "
-              style="min-height: 500px;margin-bottom: 50px;"
-            >
+            <el-card class="box-card">
               <router-view />
-            </div>
+            </el-card>
           </div>
-        </div>
-      </div>
+        </el-col>
+      </el-row>
     </div>
   </div>
 </template>
@@ -35,6 +32,16 @@ export default {
 </script>
 
 <style lang="scss">
+.el-row {
+    margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

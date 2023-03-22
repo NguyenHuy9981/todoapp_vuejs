@@ -1,21 +1,20 @@
 import Vue from 'vue';
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 import VueExcelXlsx from 'vue-excel-xlsx';
+import ElementUI from 'element-ui';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 import mixin from './mixin';
 import i18n from './plugins/i18n';
-
-import './router/middleware';
-
+import uiI18n from './languages/elementui';
+import 'element-ui/lib/theme-chalk/index.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/js/all.js';
 
-Vue.use(BootstrapVue);
-Vue.use(IconsPlugin);
+import './router/middleware';
+
+Vue.use(ElementUI, { locale: uiI18n });
 Vue.use(VueExcelXlsx);
 Vue.use(mixin);
 Vue.config.productionTip = false;
