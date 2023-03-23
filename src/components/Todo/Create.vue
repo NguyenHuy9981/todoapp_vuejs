@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <b-button
       variant="primary"
@@ -37,7 +37,7 @@
       </div>
     </b-modal>
   </div>
-</template>
+</template> -->
 
 <script>
 export default {

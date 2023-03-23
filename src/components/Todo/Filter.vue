@@ -1,6 +1,5 @@
-<template>
+<!-- <template>
   <div>
-    <!--Filter By Status-->
     <div>
       <b-form-select
         v-model="form.status"
@@ -18,7 +17,6 @@
       </b-button>
     </div>
 
-    <!--Filter By Name-->
     <div>
       <b-form-input
         id="input-2"
@@ -34,8 +32,25 @@
       </b-button>
     </div>
   </div>
-</template>
+</template> -->
 
+<template>
+  <div>
+    <el-select
+      v-model="form.status"
+      placeholder="Chọn trạng thái"
+      class="mb-4"
+      size="medium"
+      @change="onFliter"
+    >
+      <el-option
+        v-for="item in getTodoStatus"
+        :key="item.value"
+        :value="item.value"
+      />
+    </el-select>
+  </div>
+</template>
 <script>
 import { mapActions } from 'vuex';
 

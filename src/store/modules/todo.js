@@ -8,6 +8,11 @@ export default {
     filter: {
 
     },
+    pagging: {
+      page: 0,
+      limit: 0,
+      total: 0,
+    },
     option: {
       status: [
         {
@@ -48,6 +53,9 @@ export default {
     },
     getTodoDetail(state) {
       return state.job;
+    },
+    getTodoPagging(state) {
+      return state.pagging;
     },
     getCommentList(state) {
       return state.listComment;
@@ -91,15 +99,30 @@ export default {
     SET_FILE(state, listFile) {
       state.listFile = listFile;
     },
+    RESET_PAGGING(state) {
+      state.pagging.page = 1;
+    },
+    SET_PAGGING(state, { page, limit }) {
+      state.pagging.page = page;
+      state.pagging.limit = limit;
+    },
+    SET_TOTAL(state, total) {
+      state.pagging.total = total;
+    },
   },
   actions: {
-    async TodoGetList({ commit, state }, { page, limit }) {
-      const result = await api.getList(state.filter, page, limit);
+    async TodoGetList({ commit, state }) {
+      const result = await api.getList(state.filter, state.pagging.page, state.pagging.limit);
 
       if (result.success) {
         commit('SET_LIST', result.data);
+        commit('SET_TOTAL', result.total);
       }
       return result;
+    },
+    async TodoChangePage({ commit }, pagging) {
+      commit('SET_PAGGING', pagging);
+      return pagging;
     },
     async TodoDelete({ commit }, id) {
       const result = await api.delete(id);
@@ -132,6 +155,7 @@ export default {
     },
     async TodoFilter({ commit, dispatch }, data) {
       commit('SET_FILTER', data);
+      commit('RESET_PAGGING', data);
 
       return dispatch('TodoGetList');
     },

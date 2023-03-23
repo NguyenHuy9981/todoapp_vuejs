@@ -3,7 +3,7 @@ import api from './base';
 const router = '/todo';
 
 export default {
-  async getList(query = { }, page = 0, limit = 10) {
+  async getList(query = { }, page = 1, limit = 10) {
     return api.get(router, {
       params: {
         ...query,

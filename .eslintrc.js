@@ -39,7 +39,9 @@ module.exports = {
     'import/prefer-default-export': 'off',
     // 'import/order': 'off',
     'no-empty': 'off',
+    'vue/no-deprecated-v-bind-sync': 'off',
     'vue/no-use-v-if-with-v-for': 'off',
+    'vue/require-explicit-emits': 'off',
     'vue/no-deprecated-filter': 'off',
   },
 };

@@ -1,9 +1,9 @@
 <template>
   <div>
     <div>
-      <h1>{{ $t("TODO_LIST") }} ({{ getTodoCount }})</h1>
+      <h1>{{ $t("TODO_LIST") }}</h1>
     </div>
-    <create />
+    <!-- <create /> -->
     <filter-bar />
     <list
       ref="TodoList"
@@ -23,14 +23,16 @@
       </template> -->
       <p>Emit: {{ emit }}</p>
     </list>
+    <paging-bar />
   </div>
 </template>
 
 <script>
 
-import Create from '../../components/Todo/Create.vue';
+// import Create from '../../components/Todo/Create.vue';
 import List from '../../components/Todo/List.vue';
 import Filter from '../../components/Todo/Filter.vue';
+import Pagination from '../../components/Todo/Pagination.vue';
 
 export default {
   name: 'TodoIndex',
@@ -40,9 +42,10 @@ export default {
     };
   },
   components: {
-    'create': Create,
+    // 'create': Create,
     'list': List,
     'filter-bar': Filter,
+    'paging-bar': Pagination,
   },
   mounted() {
     // this.$refs.TodoList.loadTodo() // Copoment Parent call methods in Child Component
