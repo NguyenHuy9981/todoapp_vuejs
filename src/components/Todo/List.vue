@@ -13,7 +13,9 @@
       width="180"
     >
       <template #default="scope">
-        <a @click="getRouterId('todo', scope.row._id)">{{ scope.row.name }}</a>
+        <router-link :to="getRouterId('todo', scope.row._id)">
+          {{ scope.row.name }}
+        </router-link>
       </template>
     </el-table-column>
     <el-table-column
