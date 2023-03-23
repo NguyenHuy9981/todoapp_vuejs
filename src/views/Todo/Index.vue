@@ -3,7 +3,7 @@
     <div>
       <h1>{{ $t("TODO_LIST") }}</h1>
     </div>
-    <!-- <create /> -->
+    <create />
     <filter-bar />
     <list
       ref="TodoList"
@@ -29,7 +29,7 @@
 
 <script>
 
-// import Create from '../../components/Todo/Create.vue';
+import Create from '../../components/Todo/Create.vue';
 import List from '../../components/Todo/List.vue';
 import Filter from '../../components/Todo/Filter.vue';
 import Pagination from '../../components/Todo/Pagination.vue';
@@ -42,7 +42,7 @@ export default {
     };
   },
   components: {
-    // 'create': Create,
+    'create': Create,
     'list': List,
     'filter-bar': Filter,
     'paging-bar': Pagination,

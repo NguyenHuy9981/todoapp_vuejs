@@ -9,6 +9,7 @@ import i18n from './plugins/i18n';
 import uiI18n from './languages/elementui';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'tailwindcss/dist/tailwind.min.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/js/all.js';
 

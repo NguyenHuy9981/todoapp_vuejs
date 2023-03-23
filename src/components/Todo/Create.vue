@@ -38,6 +38,13 @@
     </b-modal>
   </div>
 </template> -->
+<template>
+  <div class="text-right">
+    <el-button type="success">
+      Add
+    </el-button>
+  </div>
+</template>
 
 <script>
 export default {
