@@ -1,48 +1,68 @@
-<!-- <template>
-  <div>
-    <b-button
-      variant="primary"
-      class="mx-2"
-      style="float:right"
-      @click="show =true"
-    >
-      {{ $t("ADD") }}
-    </b-button>
-    <b-modal
-      v-model="show"
-      title="BootstrapVue"
-      @ok="onSubmit"
-    >
-      <div @submit="onSubmit">
-        <b-form-group id="input-group-2">
-          <b-form-input
-            v-model="form.name"
-            placeholder="Enter name"
-            required
-          />
-          <b-form-textarea
-            v-model="form.description"
-            placeholder="Enter Description"
-            required
-          />
-          <b-form-select
-            v-model="form.status"
-            :options="getTodoStatus"
-          >
-            <b-form-select-option :value="''">
-              {{ $t("SELECT_STATUS") }}
-            </b-form-select-option>
-          </b-form-select>
-        </b-form-group>
-      </div>
-    </b-modal>
-  </div>
-</template> -->
 <template>
   <div class="text-right">
-    <el-button type="success">
-      Add
+    <el-button
+      type="success"
+      @click="centerDialogVisible = true"
+    >
+      Tao moi
     </el-button>
+    <el-dialog
+      title="Tạo Task mới"
+      :visible.sync="centerDialogVisible"
+      width="30%"
+      center
+    >
+      <el-form
+        ref="ruleForm"
+        :model="form"
+        :rules="rules"
+      >
+        <el-row>
+          <el-col>
+            <el-form-item
+              label="Tiêu đề"
+              prop="name"
+            >
+              <el-input
+                v-model="form.name"
+                required
+              />
+            </el-form-item>
+            <el-form-item
+              label="Mô tả"
+              prop="description"
+            >
+              <el-input
+                v-model="form.description"
+                required
+              />
+            </el-form-item>
+            <el-select
+              v-model="form.status"
+              placeholder="Chọn trạng thái"
+              class="mb-4"
+              size="medium"
+            >
+              <el-option
+                v-for="item in getTodoStatus"
+                :key="item.value"
+                :value="item.value"
+              />
+            </el-select>
+            <el-form-item>
+              <el-button
+                type="primary"
+                :loading="btnLoading"
+                :disabled="btnLoading"
+                @click="onSubmit() "
+              >
+                Tạo
+              </el-button>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
@@ -51,31 +71,48 @@ export default {
   name: 'TodoCreate',
   data() {
     return {
-      show: false,
+      centerDialogVisible: false,
       form: {
         name: '',
         description: '',
         status: '',
       },
+      rules: {
+        name: [
+          {
+            required: true,
+          },
+        ],
+        description: [
+          {
+            required: true,
+          },
+        ],
+      },
+      btnLoading: false,
     };
   },
   methods: {
     async onSubmit() {
       try {
-        const result = await this.TodoCreate(this.form);
-        this.form.name = '';
-        this.form.description = '';
-        console.log(result);
+        this.$refs.ruleForm.validate(async (valid) => {
+          if (valid) {
+            this.btnLoading = true;
+            const result = await this.TodoCreate(this.form);
+
+            if (result.success) {
+              this.form.name = '';
+              this.form.description = '';
+              this.centerDialogVisible = false;
+            }
+          }
+        });
       } catch (error) {
         console.log('Loi');
       }
-    },
-  },
-  watch: {
-    'form.name': function (oldValue) {
-      console.log(oldValue);
-    },
-  },
 
+      this.btnLoading = false;
+    },
+  },
 };
 </script>

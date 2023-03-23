@@ -18,7 +18,10 @@
         <el-form-item
           label="Password"
         >
-          <el-input v-model="form.password" />
+          <el-input
+            v-model="form.password"
+            type="password"
+          />
         </el-form-item>
         <el-form-item>
           <el-button

@@ -11,7 +11,11 @@
       prop="name"
       label="Jobs"
       width="180"
-    />
+    >
+      <template #default="scope">
+        <a @click="getRouterId('todo', scope.row._id)">{{ scope.row.name }}</a>
+      </template>
+    </el-table-column>
     <el-table-column
       prop="name"
       label="Jobs"
@@ -107,7 +111,6 @@ export default {
     },
 
   },
-
 };
 </script>
 
