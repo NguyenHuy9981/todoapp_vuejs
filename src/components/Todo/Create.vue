@@ -34,10 +34,13 @@
             >
               <el-input
                 v-model="form.description"
+                type="textarea"
+                :rows="4"
                 required
               />
             </el-form-item>
             <el-select
+              v-if="false"
               v-model="form.status"
               placeholder="Chọn trạng thái"
               class="mb-4"
@@ -75,7 +78,7 @@ export default {
       form: {
         name: '',
         description: '',
-        status: '',
+        status: 'unfulfilled',
       },
       rules: {
         name: [
