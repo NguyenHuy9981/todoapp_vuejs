@@ -19,8 +19,8 @@
       </template>
     </el-table-column>
     <el-table-column
-      prop="name"
-      label="Jobs"
+      prop="description"
+      label="Mô tả"
       width="180"
     />
     <el-table-column
