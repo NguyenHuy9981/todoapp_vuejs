@@ -68,7 +68,7 @@
           </el-col>
         </el-row>
       </el-form>
-      <v-for
+      <div
         v-for="(comment) in getCommentList"
         :key="comment._id"
       >
@@ -91,7 +91,7 @@
             </el-button>
           </el-col>
         </el-row>
-      </v-for>
+      </div>
     </el-row>
   </el-card>
 </template>
