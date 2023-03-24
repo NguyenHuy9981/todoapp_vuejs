@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <div class="container justify-content-center mt-5 border-left border-right">
       <div class="d-flex justify-content-center pt-3 pb-2">
@@ -39,6 +39,61 @@
       </div>
     </div>
   </div>
+</template> -->
+<template>
+  <el-card class="box-card">
+    <h3 class="mb-3">
+      Comment:
+    </h3>
+    <el-row>
+      <el-form
+        :model="form"
+      >
+        <el-row>
+          <el-col>
+            <el-form-item>
+              <el-input v-model="form.comment" />
+            </el-form-item>
+
+            <el-form-item>
+              <el-button
+                type="primary"
+                :loading="btnLoading"
+                :disabled="btnLoading"
+                @click="postComment"
+              >
+                Thêm
+              </el-button>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+      <v-for
+        v-for="(comment) in getCommentList"
+        :key="comment._id"
+      >
+        <el-row>
+          <el-col
+            :span="16"
+            class="mt-4 grid-content bg-purple-light"
+          >
+            <span> {{ comment.content }}</span>
+          </el-col>
+          <el-col :span="4">
+            <el-button
+              class="mt-4 ml-2"
+              size="medium"
+              type="danger"
+              plain
+              @click="deleteComment(comment._id)"
+            >
+              Xóa
+            </el-button>
+          </el-col>
+        </el-row>
+      </v-for>
+    </el-row>
+  </el-card>
 </template>
 
 <script>
@@ -55,7 +110,10 @@ export default {
   data() {
     return {
       list: [],
-      text: '',
+      form: {
+        comment: '',
+      },
+      btnLoading: false,
     };
   },
   computed: {
@@ -67,10 +125,11 @@ export default {
       this.TodoListComment(this.todoId);
     },
     postComment() {
+      this.btnLoading = true;
       const newData = {
         'jobId': this.todoId,
         'data': {
-          content: this.text,
+          content: this.form.comment,
         },
       };
       this.TodoCreateComment(newData);
@@ -90,73 +149,23 @@ export default {
 </script>
 
 <style scoped>
-a:hover {
-    color: red;
-    cursor: pointer;
-}
-body{
-background-color: #fff;
-}
-.container{
-background-color: #eef2f5;
-width: 400px;
-}
-.addtxt{
-padding-top: 10px;
-padding-bottom: 10px;
-text-align: center;
-font-size: 13px;
-width: 350px;
-background-color: #e5e8ed;
-font-weight: 500;
-}
-.form-control focus{
-color: #000;
-}
-.second{
-width: 350px;
-background-color: white;
-border-radius: 4px;
-box-shadow: 10px 10px 5px #aaaaaa;
-}
-.text1{
-font-size: 13px;
-    font-weight: 500;
-    color: #56575b;
-}
-.text2{
-font-size: 13px;
-    font-weight: 500;
-    margin-left: 6px;
-    color: #56575b;
-}
-.text3{
-font-size: 13px;
-    font-weight: 500;
-    margin-right: 4px;
-    color: #828386;
-}
-.text3o{
-color: #00a5f4;
+  .el-row {
+    margin-bottom: 20px;
 
-}
-.text4{
-font-size: 13px;
-  font-weight: 500;
-  color: #828386;
-}
-.text4i{
-color: #00a5f4;
-}
-.text4o{
-color: white;
-}
-.thumbup{
-font-size: 13px;
-    font-weight: 500;
-    margin-right: 5px;
-}
-.thumbupo{
-color: #17a2b8;
-}
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  }
+  .bg-purple-light {
+    background: #e5e9f2;
+  }
+
+  h3 {
+  font-weight: bold;
+  font-size: medium;
+  }
 </style>
