@@ -198,6 +198,10 @@ export default {
       const result = await api.uploadFile(formData);
       return result;
     },
+    async TodoRemoveFile({ }, { id, fileRef }) {
+      const result = await api.removeFile(id, fileRef);
+      return result;
+    },
     async TodoAddFile({ }, { id, fileRef }) {
       const result = await api.addFile(id, fileRef);
       return result;

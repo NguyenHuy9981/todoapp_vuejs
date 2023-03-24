@@ -48,6 +48,11 @@ export default {
       fileRef,
     });
   },
+  async removeFile(id, fileRef) {
+    return api.put(`${router}/removeFile/${id}`, {
+      fileRef,
+    });
+  },
   async getfile(id) {
     return api.get(`${router}/file/${id}`);
   },
