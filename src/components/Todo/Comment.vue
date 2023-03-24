@@ -124,7 +124,7 @@ export default {
     getComment() {
       this.TodoListComment(this.todoId);
     },
-    postComment() {
+    async postComment() {
       this.btnLoading = true;
       const newData = {
         'jobId': this.todoId,
@@ -132,7 +132,8 @@ export default {
           content: this.form.comment,
         },
       };
-      this.TodoCreateComment(newData);
+      await this.TodoCreateComment(newData);
+      this.btnLoading = false;
     },
     deleteComment(commentId) {
       this.TodoDeleteComment(commentId);
