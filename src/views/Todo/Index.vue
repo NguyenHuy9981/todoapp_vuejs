@@ -1,9 +1,7 @@
 <template>
   <div>
     <div>
-      <h1 style="font-weight: bold;font-size: x-large;">
-        {{ $t("TODO_LIST") }}
-      </h1>
+      <h1>{{ $t("TODO_LIST") }}</h1>
     </div>
     <create />
     <filter-bar />
@@ -59,3 +57,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+  h1 {
+    font-weight: bold;
+    font-size: x-large;
+  }
+</style>
