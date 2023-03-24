@@ -98,6 +98,9 @@
         <comment-box :todo-id="id" />
       </el-col>
       <el-col>
+        <File :todo-id="id" />
+      </el-col>
+      <el-col>
         <el-form-item>
           <el-button
             class="mt-5"
@@ -115,13 +118,13 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import Comment from '../../components/Todo/Comment.vue';
-// import File from '../../components/Todo/File.vue';
+import File from '../../components/Todo/File.vue';
 
 export default {
   name: 'TodoDetail',
   components: {
     'comment-box': Comment,
-    // File,
+    File,
   },
   data() {
     return {
