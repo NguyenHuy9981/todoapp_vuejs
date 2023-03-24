@@ -5,7 +5,9 @@
       mode="horizontal"
     >
       <el-menu-item index="todo">
-        To Do App
+        <router-link :to="getRouterPath('todo')">
+          Todo App
+        </router-link>
       </el-menu-item>
       <el-submenu
         v-if="getUserAuthed"
