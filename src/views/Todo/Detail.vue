@@ -100,7 +100,7 @@
       <el-col>
         <File :todo-id="id" />
       </el-col>
-      <el-col>
+      <el-col class="text-right">
         <el-form-item>
           <el-button
             class="mt-5"

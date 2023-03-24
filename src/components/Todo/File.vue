@@ -1,37 +1,36 @@
 <template>
   <div>
-    <b-form-file
-      v-model="fileUpload"
-      :state="Boolean(fileState)"
-      placeholder="Choose a file or drop it here..."
-      drop-placeholder="Drop file here..."
-    />
-    <b-button
-      class="mb-4"
-      variant="success"
-      @click="onUploadFile"
-    >
-      Thêm
-    </b-button>
-    <div
-      v-for="(item) in listFileShow"
-      :key="item._id"
-      class="image"
-    >
-      <img
-        v-if="isFileImage(item)"
-        :src="item.url"
+    <h3 class="mb-3">
+      File:
+    </h3>
+    <el-row>
+      <el-col
+        :span="12"
+        :offset="6"
       >
-      <div v-else>
-        <a
-          target="_blank"
-          :href="item.url"
-          :download="item.name"
+        <el-upload
+          action="/"
+          drag
+          :file-list="listFileShow"
+          list-type="picture"
+          :auto-upload="false"
+          :on-remove="onRemoveFile"
+          :on-change="onUploadFile"
+          style="width:100%"
         >
-          {{ item.name }}
-        </a>
-      </div>
-    </div>
+          <i class="el-icon-upload" />
+          <div class="el-upload__text">
+            Drop file here or <em>click to upload</em>
+          </div>
+          <div
+
+            class="el-upload__tip"
+          >
+            jpg/png files with a size less than 500kb
+          </div>
+        </el-upload>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -54,16 +53,15 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['TodoUploadFile', 'TodoGetId', 'TodoAddFile']),
+    ...mapActions(['TodoUploadFile', 'TodoRemoveFile', 'TodoRemoveFile', 'TodoGetId', 'TodoAddFile']),
     async getJob() {
       const result = await this.TodoGetId(this.todoId);
       this.listFile = result.data.fileRef;
     },
-    async onUploadFile() {
+    async onUploadFile(file) {
       const formData = new FormData();
 
-      formData.append('file', this.fileUpload);
-
+      formData.append('file', file.raw);
       const result = await this.TodoUploadFile(formData);
       if (result.success) {
         await this.TodoAddFile({
@@ -72,6 +70,25 @@ export default {
         });
         this.listFile.push(result.data);
       }
+    },
+    async onUploadFileV1() {
+      const formData = new FormData();
+
+      formData.append('file', this.fileUpload);
+      const result = await this.TodoUploadFile(formData);
+      if (result.success) {
+        await this.TodoAddFile({
+          id: this.todoId,
+          fileRef: result.data._id,
+        });
+        this.listFile.push(result.data);
+      }
+    },
+    onRemoveFile(file) {
+      this.TodoRemoveFile({
+        id: this.todoId,
+        fileRef: file._id,
+      });
     },
     isFileImage(item) {
       return item.type === 'image/jpeg';
@@ -100,5 +117,8 @@ img{
   width: 30%;
   height: 30%;
 }
-
+h3 {
+  font-weight: bold;
+  font-size: medium;
+}
 </style>
