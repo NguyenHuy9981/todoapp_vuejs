@@ -12,7 +12,10 @@
         Xuất File Excel
       </vue-excel-xlsx>
     </div>
-    <el-tabs>
+    <el-tabs
+      v-model="activeTab"
+      @tab-click="handlechangeTab"
+    >
       <el-tab-pane
         v-for="(tab) in getListTab"
         :key="tab.value"
@@ -51,7 +54,23 @@
         prop="status"
         label="Status"
         width="180"
-      />
+      >
+        <template #default="scope">
+          <el-select
+            v-model="scope.row.status"
+            placeholder="Chọn trạng thái"
+            class="mb-4"
+            size="medium"
+            @change="changeStatus(scope.row._id, scope.row.status)"
+          >
+            <el-option
+              v-for="item in getTodoStatus"
+              :key="item.value"
+              :value="item.value"
+            />
+          </el-select>
+        </template>
+      </el-table-column>
       <el-table-column
         prop="createdAt"
         label="Ngày tạo"
@@ -110,10 +129,11 @@ export default {
       ],
 
       fileName: `todo-${moment().format('DD-MM-YYYY-hh-mm')}`,
+      activeTab: 'all',
     };
   },
   methods: {
-    ...mapActions(['TodoGetList', 'TodoUpdate', 'TodoDelete', 'TodoTab']),
+    ...mapActions(['TodoGetList', 'TodoUpdate', 'TodoDelete', 'TodoTab', 'TodoFilter']),
     async changeStatus(id, status) {
       await this.TodoUpdate({
         id,
@@ -121,11 +141,20 @@ export default {
           status,
         },
       });
+      this.TodoTab();
     },
     showDataEmit() {
       const jobEmit = this.getTodoList.map((job) => job.name);
       this.$emit('showJobEmit', jobEmit);
     },
+    handlechangeTab() {
+      const filter = {};
+      if (this.activeTab !== 'all') {
+        filter.status = this.activeTab;
+      }
+      this.TodoFilter(filter);
+    },
+
   },
   computed: {
     ...mapGetters(['getListTab']),

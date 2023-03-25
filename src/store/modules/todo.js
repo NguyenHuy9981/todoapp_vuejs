@@ -131,10 +131,12 @@ export default {
       state.pagging.total = total;
     },
     UPDATE_TAB(state, data) {
-      data.forEach((item) => {
-        const tab = state.listTab.find((tabItem) => tabItem.value === item._id);
-        if (tab) {
-          tab.count = item.count;
+      state.listTab.forEach((tab) => {
+        const tabMatch = data.find((item) => tab.value === item._id);
+        if (tabMatch) {
+          tab.count = tabMatch.count;
+        } else {
+          tab.count = 0;
         }
       });
     },
