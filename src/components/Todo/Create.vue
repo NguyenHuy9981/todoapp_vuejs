@@ -4,7 +4,7 @@
       type="success"
       @click="centerDialogVisible = true"
     >
-      Tao moi
+      Tạo mới
     </el-button>
     <el-dialog
       title="Tạo Task mới"
