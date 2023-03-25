@@ -1,52 +1,65 @@
 <template>
-  <el-table
-    :data="listJobShow"
-    border
-    stripe
-    fit
-    style="width: 100%"
-  >
-    <el-table-column type="index" />
-    <el-table-column
-      prop="name"
-      label="Jobs"
-      width="180"
+  <div>
+    <vue-excel-xlsx
+      class="mt-3 button-excel right"
+
+      :data="listJobShow"
+      :columns="columns"
+      :file-name="fileName"
+      file-type="xlsx"
+      sheet-name="Todo"
     >
-      <template #default="scope">
-        <router-link :to="getRouterId('todo', scope.row._id)">
-          {{ scope.row.name }}
-        </router-link>
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="description"
-      label="Mô tả"
-      width="180"
-    />
-    <el-table-column
-      prop="status"
-      label="Status"
-      width="180"
-    />
-    <el-table-column
-      prop="createdAt"
-      label="Ngày tạo"
+      Xuất File Excel
+    </vue-excel-xlsx>
+    <el-table
+      :data="listJobShow"
+      border
+      stripe
+      fit
+      style="width: 100%"
     >
-      <template #default="scope">
-        <i class="el-icon-time" />
-        <span style="margin-left: 10px">{{ scope.row.createdAt | formatDate }}</span>
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="doneDay"
-      label="Ngày hoàn thành"
-    >
-      <template #default="scope">
-        <i class="el-icon-time" />
-        <span style="margin-left: 10px">{{ scope.row.doneDay | formatDate }}</span>
-      </template>
-    </el-table-column>
-  </el-table>
+      <el-table-column type="index" />
+      <el-table-column
+        prop="name"
+        label="Jobs"
+        width="180"
+      >
+        <template #default="scope">
+          <router-link :to="getRouterId('todo', scope.row._id)">
+            {{ scope.row.name }}
+          </router-link>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="description"
+        label="Mô tả"
+        width="180"
+      />
+      <el-table-column
+        prop="status"
+        label="Status"
+        width="180"
+      />
+      <el-table-column
+        prop="createdAt"
+        label="Ngày tạo"
+      >
+        <template #default="scope">
+          <i class="el-icon-time" />
+          <span style="margin-left: 10px">{{ scope.row.createdAt | formatDate }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="doneDay"
+        label="Ngày hoàn thành"
+      >
+        <template #default="scope">
+          <i class="el-icon-time" />
+          <span style="margin-left: 10px">{{ scope.row.doneDay | formatDate }}</span>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
 </template>
 
 <script>
@@ -127,4 +140,12 @@ a:hover {
   float:right;
   width:100px;
 }
+.button-excel {
+  background-color:slategray;
+  font-size: medium;
+  font-weight: 500;
+  color: aliceblue;
+  border-radius: 4px;
+}
+
 </style>
