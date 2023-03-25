@@ -16,7 +16,9 @@
           :auto-upload="false"
           :on-remove="onRemoveFile"
           :on-change="onUploadFile"
+          :thumbnail-mode="true"
           style="width:100%"
+          multiple
         >
           <i class="el-icon-upload" />
           <div class="el-upload__text">
@@ -53,7 +55,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['TodoUploadFile', 'TodoRemoveFile', 'TodoRemoveFile', 'TodoGetId', 'TodoAddFile']),
+    ...mapActions(['TodoUploadFile', 'TodoRemoveFile', 'TodoGetId', 'TodoAddFile']),
     async getJob() {
       const result = await this.TodoGetId(this.todoId);
       this.listFile = result.data.fileRef;
@@ -89,6 +91,7 @@ export default {
         id: this.todoId,
         fileRef: file._id,
       });
+      this.listFile = this.listFile.filter((item) => item._id !== file._id);
     },
     isFileImage(item) {
       return item.type === 'image/jpeg';
@@ -107,18 +110,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.image {
-  position:relative
-}
-
-img{
-  width: 30%;
-  height: 30%;
-}
-h3 {
-  font-weight: bold;
-  font-size: medium;
-}
-</style>

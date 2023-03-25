@@ -99,6 +99,9 @@ export default {
     SET_FILE(state, listFile) {
       state.listFile = listFile;
     },
+    DELETE_FILE(state, id) {
+      state.listFile = state.listFile.filter((file) => file._id !== id);
+    },
     RESET_PAGGING(state) {
       state.pagging.page = 1;
     },
@@ -200,6 +203,7 @@ export default {
     },
     async TodoRemoveFile({ }, { id, fileRef }) {
       const result = await api.removeFile(id, fileRef);
+
       return result;
     },
     async TodoAddFile({ }, { id, fileRef }) {
