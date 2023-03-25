@@ -42,6 +42,7 @@ module.exports = {
     'vue/no-deprecated-v-bind-sync': 'off',
     'vue/no-use-v-if-with-v-for': 'off',
     'vue/require-explicit-emits': 'off',
+    'vue/no-deprecated-slot-attribute': 'off',
     'vue/no-deprecated-filter': 'off',
   },
 };
