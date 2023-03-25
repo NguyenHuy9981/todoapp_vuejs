@@ -1,6 +1,6 @@
 {
     "TODO_LIST" : "Danh sách việc cần làm",
-    "CHANGE_PASSWORD" : "ĐỔI MẬT KHẨU",
+    "CHANGE_PASSWORD" : "Đổi mật khẩu",
     "WELCOME" : "Chào mừng đến với ToDo App",
     "LOGIN" : "Đăng nhập",
     "REGISTER" : "Đăng kí",
@@ -13,5 +13,9 @@
     "ADD" : "Tạo mới",
     "SELECT_STATUS" : "Chọn trạng thái",
     "HOME" : "Trang chu",
-    "HELLO_USER" : "Xin chào {name} nhé"
+    "HELLO_USER" : "Xin chào {name} nhé",
+    "UNFULFILLED" : "Chưa làm",
+    "PROCESSING" : "Đang xử lý",
+    "DONE" : "Đã xong",
+    "ALL" : "Tất cả"
 }

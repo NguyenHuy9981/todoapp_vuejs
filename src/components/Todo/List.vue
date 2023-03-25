@@ -1,16 +1,28 @@
 <template>
   <div>
-    <vue-excel-xlsx
-      class="mt-3 button-excel right"
+    <div class="text-right mt-2 mb-2 ">
+      <vue-excel-xlsx
+        class="button-excel p-2"
+        :data="listJobShow"
+        :columns="columns"
+        :file-name="fileName"
+        file-type="xlsx"
+        sheet-name="Todo"
+      >
+        Xuất File Excel
+      </vue-excel-xlsx>
+    </div>
+    <el-tabs>
+      <el-tab-pane
+        v-for="(tab) in getListTab"
+        :key="tab.value"
+        :label="tab.text"
+        :name="tab.value"
+      >
+        <span slot="label">{{ tab.text }} ({{ tab.count }})</span>
+      </el-tab-pane>
+    </el-tabs>
 
-      :data="listJobShow"
-      :columns="columns"
-      :file-name="fileName"
-      file-type="xlsx"
-      sheet-name="Todo"
-    >
-      Xuất File Excel
-    </vue-excel-xlsx>
     <el-table
       :data="listJobShow"
       border
@@ -63,7 +75,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import moment from 'moment';
 
 export default {
@@ -96,11 +108,12 @@ export default {
           field: 'doneDay',
         },
       ],
+
       fileName: `todo-${moment().format('DD-MM-YYYY-hh-mm')}`,
     };
   },
   methods: {
-    ...mapActions(['TodoGetList', 'TodoUpdate', 'TodoDelete']),
+    ...mapActions(['TodoGetList', 'TodoUpdate', 'TodoDelete', 'TodoTab']),
     async changeStatus(id, status) {
       await this.TodoUpdate({
         id,
@@ -115,6 +128,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(['getListTab']),
     listJobShow() {
       return this.getTodoList.map((job) => {
         return {
@@ -126,7 +140,11 @@ export default {
     },
 
   },
+  created() {
+    this.TodoTab();
+  },
 };
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

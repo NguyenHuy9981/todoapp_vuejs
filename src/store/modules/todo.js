@@ -1,4 +1,20 @@
 import api from '../../api/todo';
+import i18n from '../../plugins/i18n';
+
+const listStatus = [
+  {
+    value: 'unfulfilled',
+    text: i18n.t('UNFULFILLED'),
+  },
+  {
+    value: 'processing',
+    text: i18n.t('PROCESSING'),
+  },
+  {
+    value: 'done',
+    text: i18n.t('DONE'),
+  },
+];
 
 export default {
   state: {
@@ -14,20 +30,7 @@ export default {
       total: 0,
     },
     option: {
-      status: [
-        {
-          value: 'unfulfilled',
-          text: 'unfulfilled',
-        },
-        {
-          value: 'processing',
-          text: 'processing',
-        },
-        {
-          value: 'done',
-          text: 'done',
-        },
-      ],
+      status: listStatus,
       limit: [5, 10, 50, 100].map((value) => {
         return {
           value,
@@ -35,8 +38,20 @@ export default {
         };
       }),
     },
-
     listFile: [],
+    listTab: [
+      {
+        value: 'all',
+        text: i18n.t('ALL'),
+        count: 0,
+      },
+      ...listStatus.map((status) => {
+        return {
+          ...status,
+          count: 0,
+        };
+      }),
+    ],
   },
   getters: {
     getTodoList(state) {
@@ -59,6 +74,9 @@ export default {
     },
     getCommentList(state) {
       return state.listComment;
+    },
+    getListTab(state) {
+      return state.listTab;
     },
   },
   mutations: {
@@ -111,6 +129,14 @@ export default {
     },
     SET_TOTAL(state, total) {
       state.pagging.total = total;
+    },
+    UPDATE_TAB(state, data) {
+      data.forEach((item) => {
+        const tab = state.listTab.find((tabItem) => tabItem.value === item._id);
+        if (tab) {
+          tab.count = item.count;
+        }
+      });
     },
   },
   actions: {
@@ -208,6 +234,11 @@ export default {
     },
     async TodoAddFile({ }, { id, fileRef }) {
       const result = await api.addFile(id, fileRef);
+      return result;
+    },
+    async TodoTab({ commit }) {
+      const result = await api.stats();
+      commit('UPDATE_TAB', result.data);
       return result;
     },
   },
