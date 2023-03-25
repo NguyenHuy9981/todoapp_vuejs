@@ -24,6 +24,9 @@ export default {
   async detail(id) {
     return api.get(`${router}/${id}`);
   },
+  async stats() {
+    return api.get(`${router}/stats`);
+  },
   async createComment(jobId, data) {
     return api.post(`${router}/comment/create`, {
       jobId,
