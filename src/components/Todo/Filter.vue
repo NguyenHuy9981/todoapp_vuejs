@@ -35,7 +35,7 @@
 </template> -->
 
 <template>
-  <div>
+  <div v-if="false">
     <el-select
       v-model="form.status"
       placeholder="Chọn trạng thái"
