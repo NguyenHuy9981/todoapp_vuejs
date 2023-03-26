@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueExcelXlsx from 'vue-excel-xlsx';
 import ElementUI from 'element-ui';
+import { createPinia, PiniaVuePlugin } from 'pinia';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -17,13 +18,17 @@ import './router/middleware';
 
 Vue.use(ElementUI, { locale: uiI18n });
 Vue.use(VueExcelXlsx);
+Vue.use(PiniaVuePlugin);
 Vue.use(mixin);
 Vue.config.productionTip = false;
+
+const pinia = createPinia();
 
 const app = new Vue({
   router,
   store,
   i18n,
+  pinia,
   render: (h) => h(App),
 }).$mount('#app');
 

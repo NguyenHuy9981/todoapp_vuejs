@@ -1,5 +1,6 @@
 import store from '../store';
 import router from './index';
+import piniaUser from '../pinia/user';
 
 let isInited = false;
 
@@ -13,6 +14,7 @@ router.beforeEach(async (to, from, next) => {
 
   if (store.getters.getUserAuthed && !isInited) {
     await store.dispatch('UserInfo');
+    await piniaUser().FetchUserInfo();
     isInited = true;
   }
 
