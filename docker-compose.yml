@@ -1,7 +1,7 @@
 version: '3'
 services:
-  todo-app-web:
+  todo-app-vue:
     build: .
-    image: huydev/todo-app:web
+    image: nguyenhuy9981/todo-app-vue:v1.0.0
     ports:
       - 8080:80
