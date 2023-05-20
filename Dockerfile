@@ -22,6 +22,6 @@ ENV VUE_APP_STATIC_URL=/uploads \
 VUE_APP_ROOT_URL=/ \
 VUE_APP_API_URL=/api \
 VUE_APP_BASE_URL=/ \
-VUE_APP_ROUTER_MODE=history
+VUE_APP_ROUTER_MODE=
 
 CMD ["nginx", "-g", "daemon off;"]
